@@ -86,7 +86,7 @@ SecondsInYear = 31557600
 SecondsInMonth = 2629800
 maxFF = dec(1 / 3)
 FFF = dec(10 ** (-2))
-u_ff = -1 * dec(1) / dec(TTMT) * dec(math.log(FFF / (dec(1) + FFF)))
+u_ff = -dec(1) / dec(TTMT) * dec(math.log(FFF / (dec(1) + FFF)))
 
 
 st.title("Node Sale Plots")
