@@ -202,10 +202,10 @@ xlabels = list([i for i in range(0, plot_scale + 1, 5)])
 xticks = list([i * SecondsInYear for i in xlabels])
 ax.set_xticks(xticks, xlabels)
 ax.set_ylim([min_y_value, max_y_value * dec(1.2)])
-y_ticks = ax.get_yticks()
-new_labels = [f'{y_tick / 1e6}' for y_tick in y_ticks]
-new_labels[0] = '0'
-ax.set_yticklabels(new_labels)
+#y_ticks = ax.get_yticks()
+#new_labels = [f'{y_tick / 1e6}' for y_tick in y_ticks]
+#new_labels[0] = '0'
+#ax.set_yticklabels(new_labels)
 
 ax.grid(True)
 st.pyplot(fig)
