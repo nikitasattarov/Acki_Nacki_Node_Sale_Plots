@@ -206,7 +206,7 @@ if node_type_option == r"Block Keeper":
         xlabels = list([i for i in range(0, (plot_scale + 4) // 5 * 5 + 1, 5)])
         xticks = list([i * SecondsInYear for i in xlabels])
         ax.set_xlabel(r'Time (in years)')
-    ax.hlines(y=dec(0.294525) / dec(100) * minted_tokens_number_calc(12 * SecondsInMonth, TotalSupply, KFS, u_tokens, FRC, ParticipantsNum, number_of_purchased_licenses), xmin=0, xmax=TTMT, color='black', linewidth=0.5)
+    ax.hlines(y=dec(0.294525) / dec(100) * minted_tokens_number_calc(12 * SecondsInMonth, TotalSupply, KFS, u_tokens, FRC, ParticipantsNum, number_of_purchased_licenses), xmin=0, xmax=TTMT, color='black', linewidth=2)
     ax.set_xticks(xticks, xlabels)
     ax.legend()
     ax.grid(True)
