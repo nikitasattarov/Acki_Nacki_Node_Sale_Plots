@@ -42,7 +42,7 @@ def input_number_of_licenses_per_tier_bk(ParticipantsNum):
         value = 1, 
         format = "%i",
         min_value = 1,
-        max_value = int(ParticipantsNum)
+        max_value = min(200, int(ParticipantsNum))
         )
 
 def input_number_of_licenses_per_tier_bm(ParticipantsNum):
@@ -52,7 +52,7 @@ def input_number_of_licenses_per_tier_bm(ParticipantsNum):
         value = 1, 
         format = "%i",
         min_value = 1,
-        max_value = int(ParticipantsNum)
+        max_value = min(200, int(ParticipantsNum))
         )
 
 def input_plot_scale():
