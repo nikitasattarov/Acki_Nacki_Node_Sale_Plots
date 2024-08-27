@@ -63,7 +63,7 @@ KFS = dec(10 ** (-5))
 TTMT = dec(2000000000)
 u = -dec(1) / TTMT * dec(math.log(KFS / (dec(1) + KFS)))
 SecondsInYear = 31557600
-
+SecondsInMonth = 2629800
 
 
 
@@ -191,9 +191,6 @@ min_y_value = min(list(values_tokens))
 max_y_value = max(list(values_tokens))
 ax.plot(values_x, values_tokens, color = "Red")
 ax.set_ylabel(r'Minted Token Amount (in thousands)')
-xlabels = list([i for i in range(0, plot_scale + 1, 5)])
-xticks = list([i * SecondsInYear for i in xlabels])
-ax.set_xticks(xticks, xlabels)
 ax.set_ylim([min_y_value, max_y_value * dec(1.2)])
 y_ticks = ax.get_yticks()
 new_labels = [f'{int(y_tick / 1e3)}' for y_tick in y_ticks]
@@ -202,11 +199,15 @@ ax.set_yticklabels(new_labels)
 min_x_value = min(list(values_x))
 max_x_value = max(list(values_x))
 ax.set_xlim([min_x_value, plot_scale * SecondsInYear * 1.05])
-if plot_scale <= 5:
+if plot_scale <= 4:
     ax.set_xlabel(r'Time (in months)')
+    xlabels = list([i for i in range(0, plot_scale * 12 + 1, 1)])
+    xticks = list([i * SecondsInYear for i in xlabels])
 else:
+    xlabels = list([i for i in range(0, plot_scale + 1, 5)])
+    xticks = list([i * SecondsInYear for i in xlabels])
     ax.set_xlabel(r'Time (in years)')
 
-
+ax.set_xticks(xticks, xlabels)
 ax.grid(True)
 st.pyplot(fig)
