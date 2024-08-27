@@ -160,15 +160,6 @@ if node_type_option == r"Block Keeper":
     If the token price exceeds this value, you will make a profit calculated as:    
     $P = \left(\text{token price} - \text{implied token price} \right) \cdot \text{APY}$
     """, icon="ℹ️")
-    if st.button("Show more details"):
-        st.markdown(r"""
-        <div style="border: 1px solid #ccc; padding: 10px; background-color: #f9f9f9;">
-        <strong>Details:</strong><br>
-        Implied 1Y Token Price is the total yearly expenses divided by the APY.
-        If the token price exceeds this value, you will make a profit calculated as:
-        $P = \left(\text{token price} - \text{implied token price} \right) \cdot \text{APY}$.
-        </div>
-        """, unsafe_allow_html=True)
     plot_scale = input_plot_scale()
 
     fig, ax = plt.subplots()
