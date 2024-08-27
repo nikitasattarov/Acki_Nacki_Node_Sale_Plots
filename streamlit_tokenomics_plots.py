@@ -188,7 +188,7 @@ fig, ax = plt.subplots()
 if plot_scale <= 15:
     values_x = np.arange(0, plot_scale * SecondsInYear * 1.05,  plot_scale * SecondsInYear * 1.05 / 1000)
 else:
-    values_x = np.arange(0, plot_scale * (SecondsInYear + 4) // 5 * 5 * 1.05,  plot_scale * (SecondsInYear + 4) // 5 * 5 * 1.05 / 1000)
+    values_x = np.arange(0, SecondsInYear * (plot_scale + 4) // 5 * 5 * 1.05,  SecondsInYear * (plot_scale + 4) // 5 * 5 * 1.05 / 1000)
 values_tokens = np.array([minted_tokens_number_calc(t, TotalSupply, KFS, u, FRC, ParticipantsNum) for t in values_x])
 min_y_value = min(list(values_tokens))
 max_y_value = max(list(values_tokens))
