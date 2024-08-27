@@ -88,7 +88,7 @@ node_type_option = st.selectbox(
 
 if node_type_option == r"Block Keeper":
     node_price_option = st.selectbox(
-    r"Select the node license price:",
+    r"Select the node license price ($):",
     (r"1500", 
     r"1750", 
     r"2041", 
