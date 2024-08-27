@@ -195,10 +195,14 @@ values_tokens = np.array([minted_tokens_number_calc(t, TotalSupply, KFS, u, FRC,
 min_y_value = min(list(values_tokens))
 max_y_value = max(list(values_tokens))
 ax.plot(values_x, values_tokens, color = "Red")
-ax.set_ylabel(r'Minted Token Amount (in thousands)')
 ax.set_ylim([min_y_value, max_y_value * dec(1.2)])
 y_ticks = ax.get_yticks()
-new_labels = [f'{int(y_tick / 1e3)}' for y_tick in y_ticks]
+if max_y_value > 10 ** 6:
+    ax.set_ylabel(r'Minted Token Amount (in millions)')
+    new_labels = [f'{int(y_tick / 1e6)}' for y_tick in y_ticks]
+else:
+    ax.set_ylabel(r'Minted Token Amount (in thousands)')
+    new_labels = [f'{int(y_tick / 1e3)}' for y_tick in y_ticks]
 new_labels[0] = '0'
 ax.set_yticklabels(new_labels)
 
