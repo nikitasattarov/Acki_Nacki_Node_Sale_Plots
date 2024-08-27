@@ -140,7 +140,7 @@ if node_type_option == r"Block Keeper":
 
 if node_type_option == r"Block Manager":
     node_price_option = st.selectbox(
-    r"Select the node license price:",
+    r"Select the node license price ($):",
     (r"400", 
     r"478", 
     r"572", 
