@@ -32,7 +32,7 @@ def input_number_of_block_managers():
         max_value = 10000
         )
 
-def expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, ParticipantsNum):
+def expected_apy_calc(TotalSupply, KFS, u_tokens, SecondsInYear, FRC, ParticipantsNum):
     return FRC * TotalSupply * (dec(1) + KFS) * (dec(1) - dec(math.exp(-u_tokens* dec(SecondsInYear)))) / ParticipantsNum
 
 def input_number_of_licenses_per_tier_bk(ParticipantsNum):
