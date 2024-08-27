@@ -199,15 +199,25 @@ ax.set_yticklabels(new_labels)
 min_x_value = min(list(values_x))
 max_x_value = max(list(values_x))
 ax.set_xlim([min_x_value, plot_scale * SecondsInYear * 1.05])
+
 if plot_scale <= 4:
     ax.set_xlabel(r'Time (in months)')
-    xlabels = list([i for i in range(0, plot_scale * 12 + 1, 1)])
-    xticks = list([i * SecondsInYear for i in xlabels])
 else:
-    xlabels = list([i for i in range(0, plot_scale + 1, 5)])
-    xticks = list([i * SecondsInYear for i in xlabels])
     ax.set_xlabel(r'Time (in years)')
 
+if plot_scale <= 2:
+    xlabels = list([i for i in range(0, plot_scale * 12 + 1, 1)])
+    xticks = list([i * SecondsInMonth for i in xlabels])
+if 3 <= plot_scale <= 5:
+    xlabels = list([i for i in range(0, plot_scale * 12 + 1, 5)])
+    xticks = list([i * SecondsInMonth for i in xlabels])
+if 6 <= plot_scale <= 15:
+    xlabels = list([i for i in range(0, plot_scale + 1, 1)])
+    xticks = list([i * SecondsInYear for i in xlabels])
+if plot_scale >= 16:
+    xlabels = list([i for i in range(0, plot_scale + 1, 5)])
+    xticks = list([i * SecondsInYear for i in xlabels])
+    
 ax.set_xticks(xticks, xlabels)
 ax.grid(True)
 st.pyplot(fig)
