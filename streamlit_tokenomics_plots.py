@@ -38,7 +38,7 @@ def expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, ParticipantsNum):
 def input_number_of_licenses_per_tier():
     return st.number_input(
         label = r'Insert a number of licenses', 
-        help = r"Number of licenses is in $ \lbrack 1, 200 \rbrack $", 
+        help = r"Number of licenses is in $ \lbrack 1, \max(200, \ \text{Number of Block Keepers}) \rbrack $", 
         value = 1, 
         format = "%i",
         min_value = 1,
