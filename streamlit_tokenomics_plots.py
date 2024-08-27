@@ -294,11 +294,21 @@ def input_number_of_licenses():
         max_value = 200
         )
 
+def input_plot_scale():
+    return st.number_input(
+        label = r'Insert a plot scale (in years)', 
+        help = r"Plot scale (in years) is in $ \lbrack 1, 60\rbrack $", 
+        value = 1, 
+        format = "%i",
+        min_value = 1,
+        max_value = 60
+        )
+
 TotalSupply = dec(10400000000)
 KFS = dec(10 ** (-5))
 TTMT = dec(2000000000)
 u = -dec(1) / TTMT * dec(math.log(KFS / (dec(1) + KFS)))
-SecondsInYear = 31557600
+SecondsInYear = dec(31557600)
 
 
 
@@ -416,7 +426,7 @@ if node_type_option == r"Block Manager":
 
 number_of_licenses = input_number_of_licenses()
 st.write("Implied 1Y Token Price = " + str(round(implied_1_y_token_price, 7)))
-
+plot_scale = input_plot_scale()
 
 
 # 1 plot
