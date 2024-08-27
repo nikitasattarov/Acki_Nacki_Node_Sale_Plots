@@ -318,35 +318,35 @@ if node_type_option == r"Block Keeper":
    index=None,
 )
     if node_price_option == r"1500 $":
-        node_license_price = 1500
-        number_of_licenses = 2500
+        node_license_price = dec(1500)
+        number_of_licenses = dec(2500)
     if node_price_option == r"1750 $":
-        node_license_price = 1750
-        number_of_licenses = 2000
+        node_license_price = dec(1750)
+        number_of_licenses = dec(2000)
     if node_price_option == r"2041 $":
-        node_license_price = 2041
-        number_of_licenses = 1300
+        node_license_price = dec(2041)
+        number_of_licenses = dec(1300)
     if node_price_option == r"2381 $":
-        node_license_price = 2381
-        number_of_licenses = 1100
+        node_license_price = dec(2381)
+        number_of_licenses = dec(1100)
     if node_price_option == r"2778 $":
-        node_license_price = 2778
-        number_of_licenses = 800
+        node_license_price = dec(2778)
+        number_of_licenses = dec(800)
     if node_price_option == r"3240 $":
-        node_license_price = 3240
-        number_of_licenses = 650
+        node_license_price = dec(3240)
+        number_of_licenses = dec(650)
     if node_price_option == r"3780 $":
-        node_license_price = 3780
-        number_of_licenses = 530
+        node_license_price = dec(3780)
+        number_of_licenses = dec(530)
     if node_price_option == r"4409 $":
-        node_license_price = 4409
-        number_of_licenses = 454
+        node_license_price = dec(4409)
+        number_of_licenses = dec(454)
     if node_price_option == r"5143 $":
-        node_license_price = 5143
-        number_of_licenses = 390
+        node_license_price = dec(5143)
+        number_of_licenses = dec(390)
     if node_price_option == r"6000 $":
-        node_license_price = 6000
-        number_of_licenses = 276
+        node_license_price = dec(6000)
+        number_of_licenses = dec(276)
     BKNum = dec(input_number_of_block_keepers())
     FRC = dec(0.675) # Function Reward Coefficient
     expected_bk_apy = expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, BKNum)
@@ -371,35 +371,35 @@ if node_type_option == r"Block Manager":
    index=None,
 )
     if node_price_option == r"400 $":
-        node_license_price = 400
-        number_of_licenses = 2500
+        node_license_price = dec(400)
+        number_of_licenses = dec(2500)
     if node_price_option == r"478 $":
-        node_license_price = 478
-        number_of_licenses = 2000
+        node_license_price = dec(478)
+        number_of_licenses = dec(2000)
     if node_price_option == r"572 $":
-        node_license_price = 572
-        number_of_licenses = 1300
+        node_license_price = dec(572)
+        number_of_licenses = dec(1300)
     if node_price_option == r"684 $":
-        node_license_price = 684
-        number_of_licenses = 1100
+        node_license_price = dec(684)
+        number_of_licenses = dec(1100)
     if node_price_option == r"818 $":
-        node_license_price = 818
-        number_of_licenses = 800
+        node_license_price = dec(818)
+        number_of_licenses = dec(800)
     if node_price_option == r"978 $":
-        node_license_price = 978
-        number_of_licenses = 650
+        node_license_price = dec(978)
+        number_of_licenses = dec(650)
     if node_price_option == r"1170 $":
-        node_license_price = 1170
-        number_of_licenses = 530
+        node_license_price = dec(1170)
+        number_of_licenses = dec(530)
     if node_price_option == r"1399 $":
-        node_license_price = 1399
-        number_of_licenses = 454
+        node_license_price = dec(1399)
+        number_of_licenses = dec(454)
     if node_price_option == r"1673 $":
-        node_license_price = 1673
-        number_of_licenses = 390
+        node_license_price = dec(1673)
+        number_of_licenses = dec(390)
     if node_price_option == r"2000 $":
-        node_license_price = 2000
-        number_of_licenses = 276
+        node_license_price = dec(2000)
+        number_of_licenses = dec(276)
     BMNum = dec(input_number_of_block_managers())
     FRC = dec(0.1) # Function Reward Coefficient
     expected_bm_apy = expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, BMNum)
