@@ -157,7 +157,7 @@ if node_type_option == r"Block Keeper":
     #st.markdown(f"<h2 style='font-weight:bold;'>Implied 1Y Token Price ($) = {round(implied_1_y_token_price, 7)} </h2>", unsafe_allow_html=True)
     with st.expander("**IMPLIED TOKEN PRICE JFHDSJFHSD**"):
         st.write("Implied 1Y Token Price is ABCDEFGH")
-        col1, col2 = st.columns([0.9, 0.1])
+    col1, col2 = st.columns([0.9, 0.1])
     with col1:
         st.markdown(f"<h2 style='font-weight:bold;'>Implied 1Y Token Price ($) = {round(implied_1_y_token_price, 7)}</h2>", unsafe_allow_html=True)
     with col2:
