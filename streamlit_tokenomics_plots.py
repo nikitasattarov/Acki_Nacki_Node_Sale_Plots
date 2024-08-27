@@ -211,7 +211,7 @@ if node_type_option == r"Block Keeper":
     ax.legend()
     ax.grid(True)
     st.pyplot(fig)
-    st.write(free_float(12 * SecondsInMonth, FFF, maxFF, u_ff))
+    st.write(minted_tokens_number_calc(11 * SecondsInMonth, TotalSupply, KFS, u_tokens, FRC, ParticipantsNum, number_of_purchased_licenses) / FRC * dec(0.75) * free_float(11 * SecondsInMonth, FFF, maxFF, u_ff))
     
 
 
