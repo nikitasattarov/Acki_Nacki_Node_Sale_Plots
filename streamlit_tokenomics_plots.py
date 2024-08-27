@@ -185,7 +185,7 @@ plot_scale = input_plot_scale()
 # 1 plot
 
 fig, ax = plt.subplots()
-values_x = np.arange(0, plot_scale * SecondsInYear * 1.05,  plot_scale * SecondsInYear / 1000)
+values_x = np.arange(0, int(TTMT),  int(TTMT) / 1000)
 values_tokens = np.array([minted_tokens_number_calc(t, TotalSupply, KFS, u, FRC, ParticipantsNum) for t in values_x])
 
 min_y_value = min(list(values_tokens))
@@ -208,7 +208,7 @@ new_labels[0] = '0'
 ax.set_yticklabels(new_labels)
 min_x_value = min(list(values_x))
 max_x_value = max(list(values_x))
-ax.set_xlim([min_x_value, max_x_value * 1.05])
+ax.set_xlim([min_x_value, plot_scale * SecondsInYear * 1.05])
 
 ax.grid(True)
 st.pyplot(fig)
