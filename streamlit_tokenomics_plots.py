@@ -247,6 +247,7 @@ if plot_scale >= 16:
     xticks = list([i * SecondsInYear for i in xlabels])
     ax.set_xlabel(r'Time (in years)')
 
+ax.hlines(y=TotalSupply / dec(10), xmin=0, xmax=TTMT, color='red', linewidth=2)
 ax.set_xticks(xticks, xlabels)
 ax.grid(True)
 st.pyplot(fig)
