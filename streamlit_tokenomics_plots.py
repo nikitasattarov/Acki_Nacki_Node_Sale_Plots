@@ -304,6 +304,9 @@ def input_plot_scale():
         max_value = 60
         )
 
+def minted_tokens_number_calc(t, TotalSupply, KFS, u, FRC, ParticipantsNum):
+    return FRC * TotalSupply * (dec(1) + KFS) * (dec(1) - dec(math.exp(-u * t))) / ParticipantsNum
+
 TotalSupply = dec(10400000000)
 KFS = dec(10 ** (-5))
 TTMT = dec(2000000000)
@@ -367,9 +370,9 @@ if node_type_option == r"Block Keeper":
     if node_price_option == r"6000 $":
         node_license_price = dec(6000)
         #number_of_licenses = dec(276)
-    BKNum = dec(input_number_of_block_keepers())
+    ParticipantsNum = dec(input_number_of_block_keepers())
     FRC = dec(0.675) # Function Reward Coefficient
-    expected_bk_apy = expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, BKNum)
+    expected_bk_apy = expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, ParticipantsNum)
     #raised_amount = node_license_price * number_of_licenses
     implied_1_y_token_price = node_license_price / expected_bk_apy
 
@@ -418,15 +421,44 @@ if node_type_option == r"Block Manager":
     if node_price_option == r"2000 $":
         node_license_price = dec(2000)
         #number_of_licenses = dec(276)
-    BMNum = dec(input_number_of_block_managers())
+    ParticipantsNum = dec(input_number_of_block_managers())
     FRC = dec(0.1) # Function Reward Coefficient
-    expected_bm_apy = expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, BMNum)
+    expected_bm_apy = expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, ParticipantsNum)
     #raised_amount = node_license_price * number_of_licenses
     implied_1_y_token_price = node_license_price / expected_bm_apy
 
-number_of_licenses = input_number_of_licenses()
+number_of_licenses = dec(input_number_of_licenses())
 st.write("Implied 1Y Token Price = " + str(round(implied_1_y_token_price, 7)))
-plot_scale = input_plot_scale()
+plot_scale = dec(input_plot_scale())
+
+# 1 plot
+
+fig, ax = plt.subplots()
+values_x = np.arange(0, plot_scale * seconds_in_year,  plot_scale * seconds_in_year / dec(1000))
+values_tokens = np.array([minted_tokens_number_calc(t, TotalSupply, KFS, u, FRC, ParticipantsNum) for t in values_x])
+
+#min_x_value = min(list(values_x))
+#max_x_value = max(list(values_x))
+min_y_value = min(list(values_tokens))
+max_y_value = max(list(values_tokens))
+
+ax.plot(values_x, values_tokens, color = "Red")
+
+ax.set_xlabel(r'Time (in years)')
+ax.set_ylabel(r'Minted Token Amount')
+
+#yticks = list([0, 2 * 10 ** 9, 4 * 10 ** 9, 6 * 10 ** 9, 8 * 10 ** 9, 10.4 * 10 ** 9])
+#ylabels = list([0, 2, 4, 6, 8, 10.4])
+#ax.set_yticks(yticks, ylabels)
+xlabels = list([i for i in range(0, plot_scale, 5)])
+xticks = list([i * seconds_in_year for i in xlabels])
+ax.set_xticks(xticks, xlabels)
+ax.set_ylim([min_y_value, max_y_value * dec(1.2)])
+
+ax.legend()
+ax.grid(True)
+st.pyplot(fig)
+
 
 
 # 1 plot
