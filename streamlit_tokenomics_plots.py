@@ -155,16 +155,46 @@ if node_type_option == r"Block Keeper":
     #raised_amount = node_license_price * number_of_licenses_per_tier
     implied_1_y_token_price = (node_license_price + server_monthly_cost * 12) / expected_bk_apy
     #st.markdown(f"<h2 style='font-weight:bold;'>Implied 1Y Token Price ($) = {round(implied_1_y_token_price, 7)} </h2>", unsafe_allow_html=True)
-    with st.expander("**IMPLIED TOKEN PRICE JFHDSJFHSD**"):
-        st.write("Implied 1Y Token Price is ABCDEFGH")
-    col1, col2 = st.columns([0.9, 0.1])
-    with col1:
-        st.markdown(f"<h2 style='font-weight:bold;'>Implied 1Y Token Price ($) = {round(implied_1_y_token_price, 7)}</h2>", unsafe_allow_html=True)
-    with col2:
-        st.markdown(
-            '<span style="font-size:20px;" title="Implied 1Y Token Price is the estimated price of the token after one year.">❓</span>',
-            unsafe_allow_html=True
-        )
+    st.markdown(
+        """
+        <style>
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            font-size: 24px;
+            margin-left: 10px;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 220px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; /* Position the tooltip above the text */
+            left: 50%;
+            margin-left: -110px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        </style>
+
+        <div class="tooltip">❓
+            <span class="tooltiptext">Implied 1Y Token Price is the estimated price of the token after one year.</span>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
     plot_scale = input_plot_scale()
 
     fig, ax = plt.subplots()
