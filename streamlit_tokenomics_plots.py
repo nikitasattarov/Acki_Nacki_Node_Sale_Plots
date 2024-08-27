@@ -316,8 +316,8 @@ if node_type_option == r"Block Keeper":
     r"5143 $", 
     r"6000 $"),
     value = r"1500 $",
-   index=None,
-)
+   index=0,
+    )
     if node_price_option == r"1500 $":
         node_license_price = dec(1500)
         number_of_licenses = dec(2500)
@@ -370,8 +370,8 @@ if node_type_option == r"Block Manager":
     r"1673 $", 
     r"2000 $"),
     value = r"400 $",
-   index=None,
-)
+   index=0,
+    )
     if node_price_option == r"400 $":
         node_license_price = dec(400)
         number_of_licenses = dec(2500)
