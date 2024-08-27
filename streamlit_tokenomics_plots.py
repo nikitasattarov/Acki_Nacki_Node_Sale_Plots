@@ -35,7 +35,7 @@ def input_number_of_block_managers():
 def expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, ParticipantsNum):
     return FRC * TotalSupply * (dec(1) + KFS) * (dec(1) - dec(math.exp(-u * dec(SecondsInYear)))) / ParticipantsNum
 
-def input_number_of_licenses():
+def input_number_of_licenses_per_tier():
     return st.number_input(
         label = r'Insert a number of licenses', 
         help = r"Number of licenses is in $ \lbrack 1, 200 \rbrack $", 
@@ -55,8 +55,8 @@ def input_plot_scale():
         max_value = 60
         )
 
-def minted_tokens_number_calc(t, TotalSupply, KFS, u, FRC, ParticipantsNum):
-    return FRC * TotalSupply * (dec(1) + KFS) * (dec(1) - dec(math.exp(-u * dec(t)))) / ParticipantsNum
+def minted_tokens_number_calc(t, TotalSupply, KFS, u, FRC, ParticipantsNum, number_of_purchased_licenses):
+    return FRC * TotalSupply * (dec(1) + KFS) * (dec(1) - dec(math.exp(-u * dec(t)))) / ParticipantsNum * number_of_purchased_licenses
 
 TotalSupply = dec(10400000000)
 KFS = dec(10 ** (-5))
@@ -93,38 +93,38 @@ if node_type_option == r"Block Keeper":
     )
     if node_price_option == r"1500 $":
         node_license_price = dec(1500)
-        #number_of_licenses = dec(2500)
+        #number_of_licenses_per_tier = dec(2500)
     if node_price_option == r"1750 $":
         node_license_price = dec(1750)
-        #number_of_licenses = dec(2000)
+        #number_of_licenses_per_tier = dec(2000)
     if node_price_option == r"2041 $":
         node_license_price = dec(2041)
-        #number_of_licenses = dec(1300)
+        #number_of_licenses_per_tier = dec(1300)
     if node_price_option == r"2381 $":
         node_license_price = dec(2381)
-        #number_of_licenses = dec(1100)
+        #number_of_licenses_per_tier = dec(1100)
     if node_price_option == r"2778 $":
         node_license_price = dec(2778)
-        #number_of_licenses = dec(800)
+        #number_of_licenses_per_tier = dec(800)
     if node_price_option == r"3240 $":
         node_license_price = dec(3240)
-        #number_of_licenses = dec(650)
+        #number_of_licenses_per_tier = dec(650)
     if node_price_option == r"3780 $":
         node_license_price = dec(3780)
-        #number_of_licenses = dec(530)
+        #number_of_licenses_per_tier = dec(530)
     if node_price_option == r"4409 $":
         node_license_price = dec(4409)
-        #number_of_licenses = dec(454)
+        #number_of_licenses_per_tier = dec(454)
     if node_price_option == r"5143 $":
         node_license_price = dec(5143)
-        #number_of_licenses = dec(390)
+        #number_of_licenses_per_tier = dec(390)
     if node_price_option == r"6000 $":
         node_license_price = dec(6000)
-        #number_of_licenses = dec(276)
+        #number_of_licenses_per_tier = dec(276)
     ParticipantsNum = dec(input_number_of_block_keepers())
     FRC = dec(0.675) # Function Reward Coefficient
     expected_bk_apy = expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, ParticipantsNum)
-    #raised_amount = node_license_price * number_of_licenses
+    #raised_amount = node_license_price * number_of_licenses_per_tier
     implied_1_y_token_price = node_license_price / expected_bk_apy
 
 if node_type_option == r"Block Manager":
@@ -144,41 +144,41 @@ if node_type_option == r"Block Manager":
     )
     if node_price_option == r"400 $":
         node_license_price = dec(400)
-        #number_of_licenses = dec(2500)
+        #number_of_licenses_per_tier = dec(2500)
     if node_price_option == r"478 $":
         node_license_price = dec(478)
-        #number_of_licenses = dec(2000)
+        #number_of_licenses_per_tier = dec(2000)
     if node_price_option == r"572 $":
         node_license_price = dec(572)
-        #number_of_licenses = dec(1300)
+        #number_of_licenses_per_tier = dec(1300)
     if node_price_option == r"684 $":
         node_license_price = dec(684)
-        #number_of_licenses = dec(1100)
+        #number_of_licenses_per_tier = dec(1100)
     if node_price_option == r"818 $":
         node_license_price = dec(818)
-        #number_of_licenses = dec(800)
+        #number_of_licenses_per_tier = dec(800)
     if node_price_option == r"978 $":
         node_license_price = dec(978)
-        #number_of_licenses = dec(650)
+        #number_of_licenses_per_tier = dec(650)
     if node_price_option == r"1170 $":
         node_license_price = dec(1170)
-        #number_of_licenses = dec(530)
+        #number_of_licenses_per_tier = dec(530)
     if node_price_option == r"1399 $":
         node_license_price = dec(1399)
-        #number_of_licenses = dec(454)
+        #number_of_licenses_per_tier = dec(454)
     if node_price_option == r"1673 $":
         node_license_price = dec(1673)
-        #number_of_licenses = dec(390)
+        #number_of_licenses_per_tier = dec(390)
     if node_price_option == r"2000 $":
         node_license_price = dec(2000)
-        #number_of_licenses = dec(276)
+        #number_of_licenses_per_tier = dec(276)
     ParticipantsNum = dec(input_number_of_block_managers())
     FRC = dec(0.1) # Function Reward Coefficient
     expected_bm_apy = expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, ParticipantsNum)
-    #raised_amount = node_license_price * number_of_licenses
+    #raised_amount = node_license_price * number_of_licenses_per_tier
     implied_1_y_token_price = node_license_price / expected_bm_apy
 
-number_of_licenses = dec(input_number_of_licenses())
+number_of_purchased_licenses = dec(input_number_of_licenses_per_tier())
 st.write("Implied 1Y Token Price = " + str(round(implied_1_y_token_price, 7)))
 plot_scale = input_plot_scale()
 
