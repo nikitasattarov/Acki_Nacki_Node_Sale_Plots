@@ -206,7 +206,7 @@ if node_type_option == r"Block Keeper":
         xlabels = list([i for i in range(0, (plot_scale + 4) // 5 * 5 + 1, 5)])
         xticks = list([i * SecondsInYear for i in xlabels])
         ax.set_xlabel(r'Time (in years)')
-    ax.hlines(y=dec(0.294588) / dec(100) / dec(0.675) * TotalSupply / ParticipantsNum, xmin=0, xmax=TTMT, color='black', linewidth=0.5)
+    ax.hlines(y=dec(0.3927) / dec(100) * TotalSupply * dec(3 / 4) / ParticipantsNum, xmin=0, xmax=TTMT, color='black', linewidth=0.5)
     ax.set_xticks(xticks, xlabels)
     ax.legend()
     ax.grid(True)
