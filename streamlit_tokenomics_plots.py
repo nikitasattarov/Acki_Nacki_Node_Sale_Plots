@@ -157,7 +157,7 @@ if node_type_option == r"Block Keeper":
     st.markdown(f"<h2 style='font-weight:bold;'>Implied 1Y Token Price ($) = {round(implied_1_y_token_price, 7)} </h2>", unsafe_allow_html=True)
     st.info(r"""
     Implied 1Y Token Price is the total yearly expenses divided by the APY.     
-    If the token price exceeds this value, you will make a profit calculated as:
+    If the token price exceeds this value, you will make a profit calculated as:    
     $P = \left(\text{token price} - \text{implied token price} \right) \cdot \text{APY}$
     """, icon="ℹ️")
     plot_scale = input_plot_scale()
