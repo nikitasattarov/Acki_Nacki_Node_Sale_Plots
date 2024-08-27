@@ -190,7 +190,8 @@ if node_type_option == r"Block Manager":
     implied_1_y_token_price = node_license_price / expected_bm_apy
     number_of_purchased_licenses = dec(input_number_of_licenses_per_tier_bm(ParticipantsNum))
 
-st.write("Implied 1Y Token Price = " + str(round(implied_1_y_token_price, 7)) + " $")
+st.markdown("<h1 style='font-weight:bold;'>ABCDEFG</h1>", unsafe_allow_html=True)
+st.markdown(f"<h2 style='font-weight:bold;'>Implied 1Y Token Price = {round(implied_1_y_token_price, 7)} $</h2>", unsafe_allow_html=True)
 plot_scale = input_plot_scale()
 
 # 1 plot
