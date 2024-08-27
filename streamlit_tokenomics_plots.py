@@ -305,7 +305,7 @@ def input_plot_scale():
         )
 
 def minted_tokens_number_calc(t, TotalSupply, KFS, u, FRC, ParticipantsNum):
-    return FRC * TotalSupply * (dec(1) + KFS) * (dec(1) - dec(math.exp(-u * t))) / ParticipantsNum
+    return FRC * TotalSupply * (dec(1) + KFS) * (dec(1) - dec(math.exp(-u * dec(t)))) / ParticipantsNum
 
 TotalSupply = dec(10400000000)
 KFS = dec(10 ** (-5))
