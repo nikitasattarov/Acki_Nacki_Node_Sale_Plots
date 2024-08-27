@@ -160,7 +160,7 @@ if node_type_option == r"Block Keeper":
     If the token price exceeds this value, you will make a profit calculated as:    
     $P = \left(\text{token price} - \text{implied token price} \right) \cdot \text{APY}$
     """, icon="ℹ️")
-    if st.checkbox("Show more details"):
+    with st.expander("Show more details"):
         st.markdown(r"""
         Implied 1Y Token Price is the total yearly expenses divided by the APY.    
         If the token price exceeds this value, you will make a profit calculated as:    
