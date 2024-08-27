@@ -203,7 +203,7 @@ xticks = list([i * SecondsInYear for i in xlabels])
 ax.set_xticks(xticks, xlabels)
 ax.set_ylim([min_y_value, max_y_value * dec(1.2)])
 y_ticks = ax.get_yticks()
-new_labels = [f'{int(y_tick / 1e6)}M' for y_tick in y_ticks]
+new_labels = [f'{y_tick / 1e6}' for y_tick in y_ticks]
 ax.set_yticklabels(new_labels)
 
 ax.grid(True)
