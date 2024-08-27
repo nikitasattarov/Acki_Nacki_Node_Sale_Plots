@@ -160,18 +160,22 @@ if node_type_option == r"Block Keeper":
     If the token price exceeds this value, you will make a profit calculated as:    
     $P = \left(\text{token price} - \text{implied token price} \right) \cdot \text{APY}$
     """, icon="ℹ️")
-    display_option = st.radio(
-        "Choose what to display:",
-        ('Implied 1Y Token Price is equal 1', 'Show more details'))
+    if "show_details" not in st.session_state:
+        st.session_state["show_details"] = False
 
-    if display_option == 'Implied 1Y Token Price is equal 1':
-        st.info("Implied 1Y Token Price is equal 1.", icon="ℹ️")
-    else:
+    toggle_button = st.button("Toggle details")
+
+    if toggle_button:
+        st.session_state["show_details"] = not st.session_state["show_details"]
+
+    if st.session_state["show_details"]:
         st.info(r"""
         Implied 1Y Token Price is the total yearly expenses divided by the APY.    
         If the token price exceeds this value, you will make a profit calculated as:    
         $P = \left(\text{token price} - \text{implied token price} \right) \cdot \text{APY}$
         """, icon="ℹ️")
+    else:
+        st.info("Implied 1Y Token Price is equal 1.", icon="ℹ️")
     plot_scale = input_plot_scale()
 
     fig, ax = plt.subplots()
