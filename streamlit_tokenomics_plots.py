@@ -155,54 +155,7 @@ if node_type_option == r"Block Keeper":
     #raised_amount = node_license_price * number_of_licenses_per_tier
     implied_1_y_token_price = (node_license_price + server_monthly_cost * 12) / expected_bk_apy
     #st.markdown(f"<h2 style='font-weight:bold;'>Implied 1Y Token Price ($) = {round(implied_1_y_token_price, 7)} </h2>", unsafe_allow_html=True)
-    st.markdown(
-        """
-        <style>
-        .help-container {
-            display: inline-block;
-            position: relative;
-            margin-left: 8px;
-            top: -4px;
-        }
-
-        .help-icon {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            color: #999;
-            border-radius: 50%;
-            border: 1px solid #999;
-            width: 16px;
-            height: 16px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-
-        .help-icon:hover::after {
-            content: "Implied 1Y Token Price is the estimated price of the token after one year.";
-            position: absolute;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #333;
-            color: #fff;
-            padding: 5px;
-            border-radius: 3px;
-            width: 200px;
-            text-align: center;
-            font-size: 12px;
-            z-index: 100;
-            white-space: nowrap;
-        }
-        </style>
-
-        <div class="help-container">
-            <div class="help-icon">?</div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    st.info("Implied 1Y Token Price is the estimated price of the token after one year.", icon="ℹ️")
     plot_scale = input_plot_scale()
 
     fig, ax = plt.subplots()
