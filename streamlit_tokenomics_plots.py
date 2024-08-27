@@ -437,23 +437,23 @@ fig, ax = plt.subplots()
 values_x = np.arange(0, plot_scale * SecondsInYear,  plot_scale * SecondsInYear / 1000)
 values_tokens = np.array([minted_tokens_number_calc(t, TotalSupply, KFS, u, FRC, ParticipantsNum) for t in values_x])
 
-#min_x_value = min(list(values_x))
-#max_x_value = max(list(values_x))
 min_y_value = min(list(values_tokens))
 max_y_value = max(list(values_tokens))
 
 ax.plot(values_x, values_tokens, color = "Red")
 
 ax.set_xlabel(r'Time (in years)')
-ax.set_ylabel(r'Minted Token Amount')
+ax.set_ylabel(r'Minted Token Amount (in millions)')
 
-#yticks = list([0, 2 * 10 ** 9, 4 * 10 ** 9, 6 * 10 ** 9, 8 * 10 ** 9, 10.4 * 10 ** 9])
-#ylabels = list([0, 2, 4, 6, 8, 10.4])
+
 #ax.set_yticks(yticks, ylabels)
 xlabels = list([i for i in range(0, plot_scale + 1, 5)])
 xticks = list([i * SecondsInYear for i in xlabels])
 ax.set_xticks(xticks, xlabels)
 ax.set_ylim([min_y_value, max_y_value * dec(1.2)])
+y_ticks = ax.get_yticks()
+new_labels = [f'{int(y_tick / 1e6)}M' for y_tick in y_ticks]
+ax.set_yticklabels(new_labels)
 
 ax.grid(True)
 st.pyplot(fig)
