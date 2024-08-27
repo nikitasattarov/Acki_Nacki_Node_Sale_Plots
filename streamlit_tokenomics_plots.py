@@ -252,12 +252,32 @@ def min_stake_from_vals_num(x, minValNum, maxValNum, cur_NV, cur_base_min_stake,
         #st.write(minStake)
         return minStake
 
+def input_number_of_block_keepers():
+    return st.number_input(
+        label = r'Insert a number of Block Keepers', 
+        help = r"Number of Block Keepers is in $ \lbrack 100, 10000 \rbrack $", 
+        value = 10000, 
+        format = "%i",
+        min_value = 100,
+        max_value = 10000
+        )
+
+def input_number_of_block_managers():
+    return st.number_input(
+        label = r'Insert a number of Block Managers', 
+        help = r"Number of Block Managers is in $ \lbrack 100, 10000 \rbrack $", 
+        value = 10000, 
+        format = "%i",
+        min_value = 100,
+        max_value = 10000
+        )
 
 TotalSupply = dec(10400000000)
 KFS = dec(10 ** (-5))
 TTMT = dec(2000000000)
 u = -dec(1) / TTMT * dec(math.log(KFS / (dec(1) + KFS)))
 SecondsInYear = 31557600
+
 
 
 
@@ -269,6 +289,8 @@ node_type_option = st.selectbox(
     r"Block Manager"),
    index=None,
 )
+
+
 
 if node_type_option == r"Block Keeper":
     node_price_option = st.selectbox(
@@ -285,6 +307,7 @@ if node_type_option == r"Block Keeper":
     r"6000 $"),
    index=None,
 )
+    BKNum = dec(input_number_of_block_keepers())
     FRC = 0.675 # Function Reward Coefficient
 
 if node_type_option == r"Block Manager":
@@ -302,7 +325,9 @@ if node_type_option == r"Block Manager":
     r"2000 $"),
    index=None,
 )
+    BMNum = dec(input_number_of_block_managers())
     FRC = 0.1 # Function Reward Coefficient
+    
 
 # 1 plot
 
