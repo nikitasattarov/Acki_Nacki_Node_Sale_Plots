@@ -197,12 +197,12 @@ max_y_value = max(list(values_tokens))
 ax.plot(values_x, values_tokens, color = "Red")
 ax.set_ylim([min_y_value, max_y_value * dec(1.2)])
 y_ticks = ax.get_yticks()
-if max_y_value > 4 * 10 ** 6:
-    ax.set_ylabel(r'Minted Token Amount (in millions)')
-    new_labels = [f'{int(y_tick / 1e6)}' for y_tick in y_ticks]
 if max_y_value > 10 ** 6:
     ax.set_ylabel(r'Minted Token Amount (in millions)')
-    new_labels = [f'{y_tick / 1e6}' for y_tick in y_ticks]
+    if any(y_tick % 1e6 != 0 for y_tick in y_ticks):
+        new_labels = [f'{y_tick / 1e6:.2f}' for y_tick in y_ticks]
+    else:
+        new_labels = [f'{int(y_tick / 1e6)}' for y_tick in y_ticks]
 else:
     ax.set_ylabel(r'Minted Token Amount (in thousands)')
     new_labels = [f'{int(y_tick / 1e3)}' for y_tick in y_ticks]
