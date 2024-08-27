@@ -261,7 +261,6 @@ plot_option = st.selectbox(
     r"Block Manager",
     r"Plots of the Acki-Nacki Consensus input parameters"),
    index=None,
-   placeholder=r"Select the plot type...",
 )
 
 # 1 plot
