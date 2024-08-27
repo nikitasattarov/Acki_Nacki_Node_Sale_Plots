@@ -139,12 +139,13 @@ if node_type_option == r"Block Keeper":
         node_license_price = dec(6000)
         #number_of_licenses_per_tier = dec(276)
     ParticipantsNum = dec(input_number_of_block_keepers())
+    number_of_purchased_licenses = dec(input_number_of_licenses_per_tier_bk(ParticipantsNum))
+    server_monthly_cost = dec(input_server_monhtly_cost())
     FRC = dec(0.675) # Function Reward Coefficient
     expected_bk_apy = expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, ParticipantsNum)
     #raised_amount = node_license_price * number_of_licenses_per_tier
-    implied_1_y_token_price = node_license_price / expected_bk_apy
-    number_of_purchased_licenses = dec(input_number_of_licenses_per_tier_bk(ParticipantsNum))
-
+    implied_1_y_token_price = (node_license_price + server_monthly_cost * 12) / expected_bk_apy
+    
 if node_type_option == r"Block Manager":
     node_price_option = st.selectbox(
     r"Select the node license price ($):",
@@ -191,12 +192,13 @@ if node_type_option == r"Block Manager":
         node_license_price = dec(2000)
         #number_of_licenses_per_tier = dec(276)
     ParticipantsNum = dec(input_number_of_block_managers())
+    number_of_purchased_licenses = dec(input_number_of_licenses_per_tier_bm(ParticipantsNum))
+    server_monthly_cost = dec(input_server_monhtly_cost())
     FRC = dec(0.1) # Function Reward Coefficient
     expected_bm_apy = expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, ParticipantsNum)
     #raised_amount = node_license_price * number_of_licenses_per_tier
-    implied_1_y_token_price = node_license_price / expected_bm_apy
-    number_of_purchased_licenses = dec(input_number_of_licenses_per_tier_bm(ParticipantsNum))
-
+    implied_1_y_token_price = (node_license_price + server_monthly_cost * 12) / expected_bm_apy
+    
 st.markdown(f"<h2 style='font-weight:bold;'>Implied 1Y Token Price ($) = {round(implied_1_y_token_price, 7)} </h2>", unsafe_allow_html=True)
 plot_scale = input_plot_scale()
 
