@@ -315,7 +315,6 @@ if node_type_option == r"Block Keeper":
     r"4409 $", 
     r"5143 $", 
     r"6000 $"),
-    value = r"1500 $",
    index=0,
     )
     if node_price_option == r"1500 $":
@@ -369,7 +368,6 @@ if node_type_option == r"Block Manager":
     r"1399 $", 
     r"1673 $", 
     r"2000 $"),
-    value = r"400 $",
    index=0,
     )
     if node_price_option == r"400 $":
