@@ -158,39 +158,47 @@ if node_type_option == r"Block Keeper":
     st.markdown(
         """
         <style>
-        .tooltip {
-            position: relative;
+        .help-container {
             display: inline-block;
+            position: relative;
+            margin-left: 8px;
+            top: -4px;
+        }
+
+        .help-icon {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #999;
+            border-radius: 50%;
+            border: 1px solid #999;
+            width: 16px;
+            height: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            font-size: 24px;
-            margin-left: 10px;
         }
 
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 220px;
-            background-color: #555;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px;
+        .help-icon:hover::after {
+            content: "Implied 1Y Token Price is the estimated price of the token after one year.";
             position: absolute;
-            z-index: 1;
-            bottom: 125%; /* Position the tooltip above the text */
+            bottom: 125%;
             left: 50%;
-            margin-left: -110px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: #fff;
+            padding: 5px;
+            border-radius: 3px;
+            width: 200px;
+            text-align: center;
+            font-size: 12px;
+            z-index: 100;
+            white-space: nowrap;
         }
         </style>
 
-        <div class="tooltip">❓
-            <span class="tooltiptext">Implied 1Y Token Price is the estimated price of the token after one year.</span>
+        <div class="help-container">
+            <div class="help-icon">?</div>
         </div>
         """,
         unsafe_allow_html=True
