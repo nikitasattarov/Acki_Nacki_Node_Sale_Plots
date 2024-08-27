@@ -176,7 +176,7 @@ if node_type_option == r"Block Keeper":
     max_y_value = max(list(values_tokens))
     ax.plot(values_x, values_tokens, color = "Red", label = "Minted Token Amount")
     ax.plot(values_x, values_ff, color = "Blue", label = "Implied Free Float Amount")
-    ax.plot(values_x, values_stake, color = "Black", label = "Staked Tokens Amount")
+    ax.plot(values_x, values_stake, color = "Black", label = "Staked Tokens")
     ax.set_ylim([min_y_value, max_y_value * dec(1.2)])
     y_ticks = ax.get_yticks()
     if max_y_value > 10 ** 9:
