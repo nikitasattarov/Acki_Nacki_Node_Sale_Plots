@@ -164,28 +164,27 @@ if node_type_option == r"Block Keeper":
     values_ff = np.array([minted_tokens_number_calc(t, TotalSupply, KFS, u_tokens, FRC, ParticipantsNum, number_of_purchased_licenses) / FRC * dec(0.75) * free_float(t, FFF, maxFF, u_ff) for t in values_x])
     min_y_value = min(list(values_tokens))
     max_y_value = max(list(values_tokens))
-    #ax.plot(values_x, values_tokens, color = "Red", label = "Minted Token Amount")
+    ax.plot(values_x, values_tokens, color = "Red", label = "Minted Token Amount")
     ax.plot(values_x, values_ff, color = "Blue", label = "Free Float Amount")
-    #ax.set_ylim([min_y_value, max_y_value * dec(1.2)])
-    #y_ticks = ax.get_yticks()
-    #if max_y_value > 10 ** 9:
-    #    ax.set_ylabel(r'Token Amount (in billions)')
-    #    if any(y_tick % 1e9 != 0 for y_tick in y_ticks):
-    #        new_labels = [f'{y_tick / 1e9:.1f}' for y_tick in y_ticks]
-    #    else:
-    #        new_labels = [f'{int(y_tick / 1e9)}' for y_tick in y_ticks]
-    #elif max_y_value > 10 ** 6:
-    #    ax.set_ylabel(r'Token Amount (in millions)')
-    #    if any(y_tick % 1e6 != 0 for y_tick in y_ticks):
-    #        new_labels = [f'{y_tick / 1e6:.1f}' for y_tick in y_ticks]
-    #    else:
-    #        new_labels = [f'{int(y_tick / 1e6)}' for y_tick in y_ticks]
-    #else:
-    #    ax.set_ylabel(r'Token Amount (in thousands)')
-    #    new_labels = [f'{int(y_tick / 1e3)}' for y_tick in y_ticks]
-    #new_labels[0] = '0'
-    #ax.set_yticklabels(new_labels)
-
+    ax.set_ylim([min_y_value, max_y_value * dec(1.2)])
+    y_ticks = ax.get_yticks()
+    if max_y_value > 10 ** 9:
+        ax.set_ylabel(r'Token Amount (in billions)')
+        if any(y_tick % 1e9 != 0 for y_tick in y_ticks):
+            new_labels = [f'{y_tick / 1e9:.1f}' for y_tick in y_ticks]
+        else:
+            new_labels = [f'{int(y_tick / 1e9)}' for y_tick in y_ticks]
+    elif max_y_value > 10 ** 6:
+        ax.set_ylabel(r'Token Amount (in millions)')
+        if any(y_tick % 1e6 != 0 for y_tick in y_ticks):
+            new_labels = [f'{y_tick / 1e6:.1f}' for y_tick in y_ticks]
+        else:
+            new_labels = [f'{int(y_tick / 1e6)}' for y_tick in y_ticks]
+    else:
+        ax.set_ylabel(r'Token Amount (in thousands)')
+        new_labels = [f'{int(y_tick / 1e3)}' for y_tick in y_ticks]
+    new_labels[0] = '0'
+    ax.set_yticklabels(new_labels)
     if plot_scale == 1:
         xlabels = list([i for i in range(0, plot_scale * 12 + 1, 1)])
         xticks = list([i * SecondsInMonth for i in xlabels])
@@ -206,13 +205,10 @@ if node_type_option == r"Block Keeper":
         xlabels = list([i for i in range(0, (plot_scale + 4) // 5 * 5 + 1, 5)])
         xticks = list([i * SecondsInYear for i in xlabels])
         ax.set_xlabel(r'Time (in years)')
-    ax.hlines(y=dec(0.33348) / dec(100) * TotalSupply * dec(3 / 4) / ParticipantsNum, xmin=0, xmax=TTMT, color='black', linewidth=0.5)
     ax.set_xticks(xticks, xlabels)
     ax.legend()
     ax.grid(True)
     st.pyplot(fig)
-    st.write(minted_tokens_number_calc(11 * SecondsInMonth, TotalSupply, KFS, u_tokens, FRC, ParticipantsNum, number_of_purchased_licenses) / FRC * dec(0.75) * free_float(11 * SecondsInMonth, FFF, maxFF, u_ff))
-    st.write(dec(0.3334815096) / dec(100) * TotalSupply * dec(3 / 4) / ParticipantsNum)
 
 
 
