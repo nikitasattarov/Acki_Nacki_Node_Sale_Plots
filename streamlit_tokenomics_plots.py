@@ -208,11 +208,11 @@ if 3 <= plot_scale <= 5:
     xticks = list([i * SecondsInMonth for i in xlabels])
     ax.set_xlabel(r'Time (in months)')
 if 6 <= plot_scale <= 15:
-    xlabels = list([i for i in range(0, plot_scale + 1, 1)])
+    xlabels = list([i for i in range(0, (plot_scale + 4) / 5 * 5 + 1, 1)])
     xticks = list([i * SecondsInYear for i in xlabels])
     ax.set_xlabel(r'Time (in years)')
 if plot_scale >= 16:
-    xlabels = list([i for i in range(0, plot_scale + 1, 5)])
+    xlabels = list([i for i in range(0, (plot_scale + 4) / 5 * 5 + 1, 5)])
     xticks = list([i * SecondsInYear for i in xlabels])
     ax.set_xlabel(r'Time (in years)')
 
