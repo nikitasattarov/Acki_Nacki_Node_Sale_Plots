@@ -93,7 +93,7 @@ FFF = dec(10 ** (-2))
 u_ff = -dec(1) / dec(TTMT) * dec(math.log(FFF / (dec(1) + FFF)))
 
 
-st.title("Node Sale Plots")
+st.title("Acki Nacki Node Sale Tokenomics Plots")
 
 node_type_option = st.selectbox(
    r"Select the type of node:",
