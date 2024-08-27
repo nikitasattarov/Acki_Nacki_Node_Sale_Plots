@@ -322,7 +322,7 @@ node_type_option = st.selectbox(
    r"Select the type of node:",
    (r"Block Keeper", 
     r"Block Manager"),
-   index=None,
+   index=0,
 )
 
 if node_type_option == r"Block Keeper":
