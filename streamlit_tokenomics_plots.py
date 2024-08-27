@@ -175,8 +175,8 @@ if node_type_option == r"Block Keeper":
     min_y_value = min(list(values_tokens))
     max_y_value = max(list(values_tokens))
     ax.plot(values_x, values_tokens, color = "Red", label = "Validator Minted Tokens")
-    ax.plot(values_x, values_ff, color = "Blue", label = "Validator Unstaked Tokens")
-    ax.plot(values_x, values_stake, color = "Black", label = "Validator Min Staked Tokens")
+    ax.plot(values_x, values_ff, color = "Blue", label = "Validator Free Float Tokens")
+    ax.plot(values_x, values_stake, color = "Black", label = "Validator Minimum Staked Tokens")
     ax.set_ylim([min_y_value, max_y_value * dec(1.2)])
     y_ticks = ax.get_yticks()
     if max_y_value > 10 ** 9:
