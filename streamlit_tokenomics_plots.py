@@ -55,9 +55,9 @@ def input_number_of_licenses_per_tier_bm(ParticipantsNum):
         max_value = min(200, int(ParticipantsNum))
         )
 
-def input_server_monhtly_cost():
+def input_server_running_monhtly_cost():
     return st.number_input(
-        label = r'Insert server monthly cost ($)',  
+        label = r'Insert server running monthly cost ($)',  
         value = 0, 
         format = "%i",
         )
@@ -140,7 +140,7 @@ if node_type_option == r"Block Keeper":
         #number_of_licenses_per_tier = dec(276)
     ParticipantsNum = dec(input_number_of_block_keepers())
     number_of_purchased_licenses = dec(input_number_of_licenses_per_tier_bk(ParticipantsNum))
-    server_monthly_cost = dec(input_server_monhtly_cost())
+    server_monthly_cost = dec(input_server_running_monhtly_cost())
     FRC = dec(0.675) # Function Reward Coefficient
     expected_bk_apy = expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, ParticipantsNum)
     #raised_amount = node_license_price * number_of_licenses_per_tier
@@ -193,7 +193,7 @@ if node_type_option == r"Block Manager":
         #number_of_licenses_per_tier = dec(276)
     ParticipantsNum = dec(input_number_of_block_managers())
     number_of_purchased_licenses = dec(input_number_of_licenses_per_tier_bm(ParticipantsNum))
-    server_monthly_cost = dec(input_server_monhtly_cost())
+    server_monthly_cost = dec(input_server_running_monhtly_cost())
     FRC = dec(0.1) # Function Reward Coefficient
     expected_bm_apy = expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, ParticipantsNum)
     #raised_amount = node_license_price * number_of_licenses_per_tier
