@@ -14,7 +14,7 @@ def dec(number):
 
 def input_number_of_block_keepers():
     return st.number_input(
-        label = r'Insert a number of Block Keepers', 
+        label = r'Insert a total number of Block Keepers', 
         help = r"Number of Block Keepers is in $ \lbrack 100, 10000 \rbrack $", 
         value = 10000, 
         format = "%i",
@@ -24,7 +24,7 @@ def input_number_of_block_keepers():
 
 def input_number_of_block_managers():
     return st.number_input(
-        label = r'Insert a number of Block Managers', 
+        label = r'Insert a total number of Block Managers', 
         help = r"Number of Block Managers is in $ \lbrack 100, 10000 \rbrack $", 
         value = 10000, 
         format = "%i",
