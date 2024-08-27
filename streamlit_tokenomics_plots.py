@@ -211,6 +211,7 @@ if node_type_option == r"Block Keeper":
     ax.legend()
     ax.grid(True)
     st.pyplot(fig)
+    st.write(free_float(12 * SecondsInMonth, FFF, maxFF, u_ff))
     
 
 
