@@ -202,8 +202,12 @@ ax.set_yticklabels(new_labels)
 min_x_value = min(list(values_x))
 ax.set_xlim([min_x_value, plot_scale * SecondsInYear * 1.05])
 
-if plot_scale <= 2:
+if plot_scale == 1:
     xlabels = list([i for i in range(0, plot_scale * 12 + 1, 1)])
+    xticks = list([i * SecondsInMonth for i in xlabels])
+    ax.set_xlabel(r'Time (in months)')
+if plot_scale == 2:
+    xlabels = list([i for i in range(0, plot_scale * 12 + 1, 2)])
     xticks = list([i * SecondsInMonth for i in xlabels])
     ax.set_xlabel(r'Time (in months)')
 if 3 <= plot_scale <= 5:
