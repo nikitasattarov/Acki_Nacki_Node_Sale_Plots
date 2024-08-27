@@ -252,6 +252,15 @@ def min_stake_from_vals_num(x, minValNum, maxValNum, cur_NV, cur_base_min_stake,
         #st.write(minStake)
         return minStake
 
+
+
+
+
+
+
+
+
+
 def input_number_of_block_keepers():
     return st.number_input(
         label = r'Insert a number of Block Keepers', 
@@ -272,6 +281,9 @@ def input_number_of_block_managers():
         max_value = 10000
         )
 
+def expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, ParticipantsNum):
+    return FRC * TotalSupply * (dec(1) + KFS) * (-dec(math.exp(-u * SecondsInYear))) / ParticipantsNum
+
 TotalSupply = dec(10400000000)
 KFS = dec(10 ** (-5))
 TTMT = dec(2000000000)
@@ -290,8 +302,6 @@ node_type_option = st.selectbox(
    index=None,
 )
 
-
-
 if node_type_option == r"Block Keeper":
     node_price_option = st.selectbox(
     r"Select the node license price:",
@@ -309,6 +319,10 @@ if node_type_option == r"Block Keeper":
 )
     BKNum = dec(input_number_of_block_keepers())
     FRC = 0.675 # Function Reward Coefficient
+    expected_bk_apy = expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, BKNum)
+    st.write(expected_bk_apy)
+
+
 
 if node_type_option == r"Block Manager":
     node_price_option = st.selectbox(
@@ -327,7 +341,8 @@ if node_type_option == r"Block Manager":
 )
     BMNum = dec(input_number_of_block_managers())
     FRC = 0.1 # Function Reward Coefficient
-    
+    expected_bm_apy = expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, BMNum)
+    st.write(expected_bm_apy)
 
 # 1 plot
 
