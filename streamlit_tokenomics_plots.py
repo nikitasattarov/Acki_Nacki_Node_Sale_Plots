@@ -255,13 +255,14 @@ def min_stake_from_vals_num(x, minValNum, maxValNum, cur_NV, cur_base_min_stake,
 
 st.title("Acki Nacki Tokenomics")
 
-#st.write(total_supply_acki_nacki(181818182, PctValsMaxReputation, minRC, maxRC, maxRT, ARFC, ABRFC, ABRPC, TotalCap, TTMT) * dec(FF_coef))
-#st.write(min_stake_calc(181818182, PctValsMaxReputation, minRC, maxRC, maxRT, ARFC, ABRFC, ABRPC, TotalCap, TTMT, 100, 10000, FF_coef))
-
-
-#TTMT_years = input_TTMT()
-#TTMT = years_to_second(TTMT_years)
-
+plot_option = st.selectbox(
+   r"Select the type of node:",
+   (r"Block Keeper", 
+    r"Block Manager",
+    r"Plots of the Acki-Nacki Consensus input parameters"),
+   index=None,
+   placeholder=r"Select the plot type...",
+)
 
 # 1 plot
 
