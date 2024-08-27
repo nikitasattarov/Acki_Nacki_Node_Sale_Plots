@@ -35,7 +35,7 @@ def input_number_of_block_managers():
 def expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, ParticipantsNum):
     return FRC * TotalSupply * (dec(1) + KFS) * (dec(1) - dec(math.exp(-u * dec(SecondsInYear)))) / ParticipantsNum
 
-def input_number_of_licenses_per_tier_bk():
+def input_number_of_licenses_per_tier_bk(ParticipantsNum):
     return st.number_input(
         label = r'Insert a number of licenses', 
         help = r"Number of licenses is in $ \left\lbrack 1, \min\left(200, \ \text{Number of Block Keepers}\right) \right\rbrack $", 
@@ -45,7 +45,7 @@ def input_number_of_licenses_per_tier_bk():
         max_value = ParticipantsNum
         )
 
-def input_number_of_licenses_per_tier_bm():
+def input_number_of_licenses_per_tier_bm(ParticipantsNum):
     return st.number_input(
         label = r'Insert a number of licenses', 
         help = r"Number of licenses is in $ \left\lbrack 1, \min\left(200, \ \text{Number of Block Managers}\right) \right\rbrack $", 
@@ -136,7 +136,7 @@ if node_type_option == r"Block Keeper":
     expected_bk_apy = expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, ParticipantsNum)
     #raised_amount = node_license_price * number_of_licenses_per_tier
     implied_1_y_token_price = node_license_price / expected_bk_apy
-    number_of_purchased_licenses = dec(input_number_of_licenses_per_tier_bk())
+    number_of_purchased_licenses = dec(input_number_of_licenses_per_tier_bk(ParticipantsNum))
 
 if node_type_option == r"Block Manager":
     node_price_option = st.selectbox(
@@ -188,7 +188,7 @@ if node_type_option == r"Block Manager":
     expected_bm_apy = expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, ParticipantsNum)
     #raised_amount = node_license_price * number_of_licenses_per_tier
     implied_1_y_token_price = node_license_price / expected_bm_apy
-    number_of_purchased_licenses = dec(input_number_of_licenses_per_tier_bm())
+    number_of_purchased_licenses = dec(input_number_of_licenses_per_tier_bm(ParticipantsNum))
 
 st.write("Implied 1Y Token Price = " + str(round(implied_1_y_token_price, 7)))
 plot_scale = input_plot_scale()
