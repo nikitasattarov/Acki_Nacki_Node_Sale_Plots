@@ -55,6 +55,13 @@ def input_number_of_licenses_per_tier_bm(ParticipantsNum):
         max_value = min(200, int(ParticipantsNum))
         )
 
+def input_server_monhtly_cost():
+    return st.number_input(
+        label = r'Insert server monthly cost ($)',  
+        value = 0, 
+        format = "%i",
+        )
+
 def input_plot_scale():
     return st.number_input(
         label = r'Insert a plot scale (in years)', 
