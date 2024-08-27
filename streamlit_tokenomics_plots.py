@@ -156,7 +156,7 @@ if node_type_option == r"Block Keeper":
     implied_1_y_token_price = (node_license_price + server_monthly_cost * 12) / expected_bk_apy
     st.markdown(f"<h2 style='font-weight:bold;'>Implied 1Y Token Price ($) = {round(implied_1_y_token_price, 7)} </h2>", unsafe_allow_html=True)
     with st.expander("Что такое Implied 1Y Token Price?"):
-    st.write("Implied 1Y Token Price — это предполагаемая цена токена через один год.")
+        st.write("Implied 1Y Token Price — это предполагаемая цена токена через один год.")
     plot_scale = input_plot_scale()
 
     fig, ax = plt.subplots()
