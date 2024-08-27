@@ -282,7 +282,7 @@ def input_number_of_block_managers():
         )
 
 def expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, ParticipantsNum):
-    return FRC * TotalSupply * (dec(1) + KFS) * (dec(1) - dec(math.exp(-u * SecondsInYear))) / ParticipantsNum
+    return FRC * TotalSupply * (dec(1) + KFS) * (dec(1) - dec(math.exp(-u * dec(SecondsInYear)))) / ParticipantsNum
 
 def input_number_of_licenses():
     return st.number_input(
@@ -311,7 +311,7 @@ TotalSupply = dec(10400000000)
 KFS = dec(10 ** (-5))
 TTMT = dec(2000000000)
 u = -dec(1) / TTMT * dec(math.log(KFS / (dec(1) + KFS)))
-SecondsInYear = dec(31557600)
+SecondsInYear = 31557600
 
 
 
@@ -429,12 +429,12 @@ if node_type_option == r"Block Manager":
 
 number_of_licenses = dec(input_number_of_licenses())
 st.write("Implied 1Y Token Price = " + str(round(implied_1_y_token_price, 7)))
-plot_scale = dec(input_plot_scale())
+plot_scale = input_plot_scale()
 
 # 1 plot
 
 fig, ax = plt.subplots()
-values_x = np.arange(dec(0), plot_scale * SecondsInYear,  plot_scale * SecondsInYear / dec(1000))
+values_x = np.arange(0, plot_scale * SecondsInYear,  plot_scale * SecondsInYear / 1000)
 values_tokens = np.array([minted_tokens_number_calc(t, TotalSupply, KFS, u, FRC, ParticipantsNum) for t in values_x])
 
 #min_x_value = min(list(values_x))
