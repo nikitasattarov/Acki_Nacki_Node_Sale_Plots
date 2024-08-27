@@ -166,25 +166,25 @@ if node_type_option == r"Block Keeper":
     max_y_value = max(list(values_tokens))
     #ax.plot(values_x, values_tokens, color = "Red", label = "Minted Token Amount")
     ax.plot(values_x, values_ff, color = "Blue", label = "Free Float Amount")
-    ax.set_ylim([min_y_value, max_y_value * dec(1.2)])
-    y_ticks = ax.get_yticks()
-    if max_y_value > 10 ** 9:
-        ax.set_ylabel(r'Token Amount (in billions)')
-        if any(y_tick % 1e9 != 0 for y_tick in y_ticks):
-            new_labels = [f'{y_tick / 1e9:.1f}' for y_tick in y_ticks]
-        else:
-            new_labels = [f'{int(y_tick / 1e9)}' for y_tick in y_ticks]
-    elif max_y_value > 10 ** 6:
-        ax.set_ylabel(r'Token Amount (in millions)')
-        if any(y_tick % 1e6 != 0 for y_tick in y_ticks):
-            new_labels = [f'{y_tick / 1e6:.1f}' for y_tick in y_ticks]
-        else:
-            new_labels = [f'{int(y_tick / 1e6)}' for y_tick in y_ticks]
-    else:
-        ax.set_ylabel(r'Token Amount (in thousands)')
-        new_labels = [f'{int(y_tick / 1e3)}' for y_tick in y_ticks]
-    new_labels[0] = '0'
-    ax.set_yticklabels(new_labels)
+    #ax.set_ylim([min_y_value, max_y_value * dec(1.2)])
+    #y_ticks = ax.get_yticks()
+    #if max_y_value > 10 ** 9:
+    #    ax.set_ylabel(r'Token Amount (in billions)')
+    #    if any(y_tick % 1e9 != 0 for y_tick in y_ticks):
+    #        new_labels = [f'{y_tick / 1e9:.1f}' for y_tick in y_ticks]
+    #    else:
+    #        new_labels = [f'{int(y_tick / 1e9)}' for y_tick in y_ticks]
+    #elif max_y_value > 10 ** 6:
+    #    ax.set_ylabel(r'Token Amount (in millions)')
+    #    if any(y_tick % 1e6 != 0 for y_tick in y_ticks):
+    #        new_labels = [f'{y_tick / 1e6:.1f}' for y_tick in y_ticks]
+    #    else:
+    #        new_labels = [f'{int(y_tick / 1e6)}' for y_tick in y_ticks]
+    #else:
+    #    ax.set_ylabel(r'Token Amount (in thousands)')
+    #    new_labels = [f'{int(y_tick / 1e3)}' for y_tick in y_ticks]
+    #new_labels[0] = '0'
+    #ax.set_yticklabels(new_labels)
 
     if plot_scale == 1:
         xlabels = list([i for i in range(0, plot_scale * 12 + 1, 1)])
