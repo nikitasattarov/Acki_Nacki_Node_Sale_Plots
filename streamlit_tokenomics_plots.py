@@ -206,6 +206,9 @@ y_ticks = ax.get_yticks()
 new_labels = [f'{int(y_tick / 1e3)}' for y_tick in y_ticks]
 new_labels[0] = '0'
 ax.set_yticklabels(new_labels)
+min_x_value = min(list(values_x))
+max_x_value = max(list(values_x))
+ax.set_xlim([min_x_value, max_x_value * 1.05])
 
 ax.grid(True)
 st.pyplot(fig)
