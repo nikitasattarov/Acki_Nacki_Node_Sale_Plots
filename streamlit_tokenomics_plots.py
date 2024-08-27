@@ -434,7 +434,7 @@ plot_scale = dec(input_plot_scale())
 # 1 plot
 
 fig, ax = plt.subplots()
-values_x = np.arange(dec(0), plot_scale * SecondsInYear,  plot_scale * seconds_in_year / dec(1000))
+values_x = np.arange(dec(0), plot_scale * SecondsInYear,  plot_scale * SecondsInYear / dec(1000))
 values_tokens = np.array([minted_tokens_number_calc(t, TotalSupply, KFS, u, FRC, ParticipantsNum) for t in values_x])
 
 #min_x_value = min(list(values_x))
