@@ -318,7 +318,7 @@ if node_type_option == r"Block Keeper":
    index=None,
 )
     BKNum = dec(input_number_of_block_keepers())
-    FRC = 0.675 # Function Reward Coefficient
+    FRC = dec(0.675) # Function Reward Coefficient
     expected_bk_apy = expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, BKNum)
     st.write(expected_bk_apy)
 
@@ -340,7 +340,7 @@ if node_type_option == r"Block Manager":
    index=None,
 )
     BMNum = dec(input_number_of_block_managers())
-    FRC = 0.1 # Function Reward Coefficient
+    FRC = dec(0.1) # Function Reward Coefficient
     expected_bm_apy = expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, BMNum)
     st.write(expected_bm_apy)
 
