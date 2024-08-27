@@ -155,10 +155,10 @@ if node_type_option == r"Block Keeper":
     #raised_amount = node_license_price * number_of_licenses_per_tier
     implied_1_y_token_price = (node_license_price + server_monthly_cost * 12) / expected_bk_apy
     st.markdown(f"<h2 style='font-weight:bold;'>Implied 1Y Token Price ($) = {round(implied_1_y_token_price, 7)} </h2>", unsafe_allow_html=True)
-    st.markdown(r"Implied 1Y Token Price is the total yearly expenses divided by the APY. "
-            r"If the token price exceeds this value, you will make a profit calculated as:\n\n"
-            r"$P = \left(\text{token price} - \text{implied token price}\right) \cdot \text{APY}$.",
-            unsafe_allow_html=True)
+    st.info(r"Implied 1Y Token Price is the total yearly expenses divided by the APY. "
+        r"If the token price exceeds this value, you will make a profit calculated as:")
+
+    st.info(r"$P = \left(\text{token price} - \text{implied token price}\right) \cdot \text{APY}$.", icon="ℹ️")
     plot_scale = input_plot_scale()
 
     fig, ax = plt.subplots()
