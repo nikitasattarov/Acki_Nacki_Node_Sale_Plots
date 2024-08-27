@@ -143,6 +143,7 @@ if node_type_option == r"Block Keeper":
     server_monthly_cost = dec(input_server_monhtly_cost())
     FRC = dec(0.675) # Function Reward Coefficient
     expected_bk_apy = expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, ParticipantsNum)
+    st.write(expected_bk_apy)
     #raised_amount = node_license_price * number_of_licenses_per_tier
     implied_1_y_token_price = (node_license_price + server_monthly_cost * 12) / expected_bk_apy
     
