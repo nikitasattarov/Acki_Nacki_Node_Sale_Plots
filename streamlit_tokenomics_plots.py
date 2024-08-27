@@ -256,7 +256,7 @@ def min_stake_from_vals_num(x, minValNum, maxValNum, cur_NV, cur_base_min_stake,
 TotalSupply = dec(10400000000)
 KFS = dec(10 ** (-5))
 TTMT = dec(2000000000)
-u = -dec(1) / TTMT * math.log(KFS / (dec(1) + KFS))
+u = -dec(1) / TTMT * dec(math.log(KFS / (dec(1) + KFS)))
 SecondsInYear = 31557600
 
 
