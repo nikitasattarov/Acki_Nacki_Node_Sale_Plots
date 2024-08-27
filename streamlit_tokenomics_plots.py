@@ -59,7 +59,7 @@ def input_plot_scale():
     return st.number_input(
         label = r'Insert a plot scale (in years)', 
         help = r"Plot scale (in years) is in $ \lbrack 1, 60\rbrack $", 
-        value = 1, 
+        value = 25, 
         format = "%i",
         min_value = 1,
         max_value = 60
