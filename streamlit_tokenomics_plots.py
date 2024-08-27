@@ -282,7 +282,7 @@ def input_number_of_block_managers():
         )
 
 def expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, ParticipantsNum):
-    return FRC * TotalSupply * (dec(1) + KFS) * (-dec(math.exp(-u * SecondsInYear))) / ParticipantsNum
+    return FRC * TotalSupply * (dec(1) + KFS) * (dec(1) - dec(math.exp(-u * SecondsInYear))) / ParticipantsNum
 
 TotalSupply = dec(10400000000)
 KFS = dec(10 ** (-5))
