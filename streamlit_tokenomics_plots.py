@@ -352,7 +352,7 @@ if node_type_option == r"Block Keeper":
     expected_bk_apy = expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, BKNum)
     raised_amount = node_license_price * number_of_licenses
     implied_1_y_token_price = node_license_price / expected_bk_apy
-    st.write("Implied 1Y Token Price = ", round(implied_1_y_token_price, 7))
+    st.write("Implied 1Y Token Price = " + str(round(implied_1_y_token_price, 7)))
 
 
 if node_type_option == r"Block Manager":
@@ -405,7 +405,7 @@ if node_type_option == r"Block Manager":
     expected_bm_apy = expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, BMNum)
     raised_amount = node_license_price * number_of_licenses
     implied_1_y_token_price = node_license_price / expected_bm_apy
-    st.write("Implied 1Y Token Price = ", round(implied_1_y_token_price, 7))
+    st.write("Implied 1Y Token Price = " + str(round(implied_1_y_token_price, 7)))
 
 # 1 plot
 
