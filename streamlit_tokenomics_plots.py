@@ -193,8 +193,8 @@ max_y_value = max(list(values_tokens))
 
 ax.plot(values_x, values_tokens, color = "Red")
 
-ax.set_xlabel(r'Time (in thousands)')
-ax.set_ylabel(r'Minted Token Amount (in millions)')
+ax.set_xlabel(r'Time (in years)')
+ax.set_ylabel(r'Minted Token Amount (in thousands)')
 
 
 #ax.set_yticks(yticks, ylabels)
@@ -203,7 +203,7 @@ xticks = list([i * SecondsInYear for i in xlabels])
 ax.set_xticks(xticks, xlabels)
 ax.set_ylim([min_y_value, max_y_value * dec(1.2)])
 y_ticks = ax.get_yticks()
-new_labels = [f'{y_tick / 1e3}' for y_tick in y_ticks]
+new_labels = [f'{int(y_tick / 1e3)}' for y_tick in y_ticks]
 new_labels[0] = '0'
 ax.set_yticklabels(new_labels)
 
