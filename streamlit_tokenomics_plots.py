@@ -33,7 +33,7 @@ def input_number_of_block_managers():
         )
 
 def expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, ParticipantsNum):
-    return FRC * TotalSupply * (dec(1) + KFS) * (dec(1) - dec(math.exp(-u * dec(SecondsInYear)))) / ParticipantsNum
+    return FRC * TotalSupply * (dec(1) + KFS) * (dec(1) - dec(math.exp(-u_tokens* dec(SecondsInYear)))) / ParticipantsNum
 
 def input_number_of_licenses_per_tier_bk(ParticipantsNum):
     return st.number_input(
@@ -72,16 +72,21 @@ def input_plot_scale():
         max_value = 60
         )
 
-def minted_tokens_number_calc(t, TotalSupply, KFS, u, FRC, ParticipantsNum, number_of_purchased_licenses):
-    return FRC * TotalSupply * (dec(1) + KFS) * (dec(1) - dec(math.exp(-u * dec(t)))) / ParticipantsNum * number_of_purchased_licenses
+def minted_tokens_number_calc(t, TotalSupply, KFS, u_tokens, FRC, ParticipantsNum, number_of_purchased_licenses):
+    return FRC * TotalSupply * (dec(1) + KFS) * (dec(1) - dec(math.exp(-u_tokens* dec(t)))) / ParticipantsNum * number_of_purchased_licenses
+
+def free_float(t, FFF, maxFF, u_ff):
+    return dec(dec(maxFF) * (dec(1) + dec(FFF)) * (dec(1) - dec(math.exp(-u_ff * dec(t)))))
 
 TotalSupply = dec(10400000000)
 KFS = dec(10 ** (-5))
 TTMT = dec(2000000000)
-u = -dec(1) / TTMT * dec(math.log(KFS / (dec(1) + KFS)))
+u_tokens= -dec(1) / TTMT * dec(math.log(KFS / (dec(1) + KFS)))
 SecondsInYear = 31557600
 SecondsInMonth = 2629800
-
+maxFF = dec(1 / 3)
+FFF = dec(10 ** (-2))
+u_ff = -1 * dec(1) / dec(TTMT) * dec(math.log(FFF / (dec(1) + FFF)))
 
 
 st.title("Node Sale Plots")
@@ -145,7 +150,69 @@ if node_type_option == r"Block Keeper":
     expected_bk_apy = expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, ParticipantsNum)
     #raised_amount = node_license_price * number_of_licenses_per_tier
     implied_1_y_token_price = (node_license_price + server_monthly_cost * 12) / expected_bk_apy
+    st.markdown(f"<h2 style='font-weight:bold;'>Implied 1Y Token Price ($) = {round(implied_1_y_token_price, 7)} </h2>", unsafe_allow_html=True)
+    plot_scale = input_plot_scale()
+
+    fig, ax = plt.subplots()
+    if plot_scale <= 15:
+        values_x = np.arange(0, plot_scale * SecondsInYear * 1.05,  plot_scale * SecondsInYear * 1.05 / 1000)
+        ax.set_xlim([0, plot_scale * SecondsInYear * 1.05])
+    else:
+        values_x = np.arange(0, SecondsInYear * (plot_scale + 4) // 5 * 5 * 1.05,  SecondsInYear * (plot_scale + 4) // 5 * 5 * 1.05 / 1000)
+        ax.set_xlim([0, (plot_scale + 4) // 5 * 5 * SecondsInYear * 1.05])
+    values_tokens = np.array([minted_tokens_number_calc(t, TotalSupply, KFS, u_tokens, FRC, ParticipantsNum, number_of_purchased_licenses) for t in values_x])
+    values_ff = np.array([minted_tokens_number_calc(t, TotalSupply, KFS, u_tokens, FRC, ParticipantsNum, number_of_purchased_licenses) / FRC * 0.75 * free_float(t, FFF, maxFF, u_ff) for t in values_x])
+    min_y_value = min(list(values_tokens))
+    max_y_value = max(list(values_tokens))
+    ax.plot(values_x, values_tokens, color = "Red")
+    ax.set_ylim([min_y_value, max_y_value * dec(1.2)])
+    y_ticks = ax.get_yticks()
+    if max_y_value > 10 ** 9:
+        ax.set_ylabel(r'Minted Token Amount (in billions)')
+        if any(y_tick % 1e9 != 0 for y_tick in y_ticks):
+            new_labels = [f'{y_tick / 1e9:.1f}' for y_tick in y_ticks]
+        else:
+            new_labels = [f'{int(y_tick / 1e9)}' for y_tick in y_ticks]
+    elif max_y_value > 10 ** 6:
+        ax.set_ylabel(r'Minted Token Amount (in millions)')
+        if any(y_tick % 1e6 != 0 for y_tick in y_ticks):
+            new_labels = [f'{y_tick / 1e6:.1f}' for y_tick in y_ticks]
+        else:
+            new_labels = [f'{int(y_tick / 1e6)}' for y_tick in y_ticks]
+    else:
+        ax.set_ylabel(r'Minted Token Amount (in thousands)')
+        new_labels = [f'{int(y_tick / 1e3)}' for y_tick in y_ticks]
+    new_labels[0] = '0'
+    ax.set_yticklabels(new_labels)
+
+    if plot_scale == 1:
+        xlabels = list([i for i in range(0, plot_scale * 12 + 1, 1)])
+        xticks = list([i * SecondsInMonth for i in xlabels])
+        ax.set_xlabel(r'Time (in months)')
+    if plot_scale == 2:
+        xlabels = list([i for i in range(0, plot_scale * 12 + 1, 2)])
+        xticks = list([i * SecondsInMonth for i in xlabels])
+        ax.set_xlabel(r'Time (in months)')
+    if 3 <= plot_scale <= 5:
+        xlabels = list([i for i in range(0, plot_scale * 12 + 1, 5)])
+        xticks = list([i * SecondsInMonth for i in xlabels])
+        ax.set_xlabel(r'Time (in months)')
+    if 6 <= plot_scale <= 15:
+        xlabels = list([i for i in range(0, plot_scale + 1, 1)])
+        xticks = list([i * SecondsInYear for i in xlabels])
+        ax.set_xlabel(r'Time (in years)')
+    if plot_scale >= 16:
+        xlabels = list([i for i in range(0, (plot_scale + 4) // 5 * 5 + 1, 5)])
+        xticks = list([i * SecondsInYear for i in xlabels])
+        ax.set_xlabel(r'Time (in years)')
+
+    ax.set_xticks(xticks, xlabels)
+    ax.grid(True)
+    st.pyplot(fig)
     
+
+
+
 if node_type_option == r"Block Manager":
     node_price_option = st.selectbox(
     r"Select the node license price ($):",
@@ -198,64 +265,73 @@ if node_type_option == r"Block Manager":
     expected_bm_apy = expected_apy_calc(TotalSupply, KFS, u, SecondsInYear, FRC, ParticipantsNum)
     #raised_amount = node_license_price * number_of_licenses_per_tier
     implied_1_y_token_price = (node_license_price + server_monthly_cost * 12) / expected_bm_apy
-    
-st.markdown(f"<h2 style='font-weight:bold;'>Implied 1Y Token Price ($) = {round(implied_1_y_token_price, 7)} </h2>", unsafe_allow_html=True)
-plot_scale = input_plot_scale()
+    st.markdown(f"<h2 style='font-weight:bold;'>Implied 1Y Token Price ($) = {round(implied_1_y_token_price, 7)} </h2>", unsafe_allow_html=True)
+    plot_scale = input_plot_scale()
 
-# 1 plot
-
-fig, ax = plt.subplots()
-if plot_scale <= 15:
-    values_x = np.arange(0, plot_scale * SecondsInYear * 1.05,  plot_scale * SecondsInYear * 1.05 / 1000)
-    ax.set_xlim([0, plot_scale * SecondsInYear * 1.05])
-else:
-    values_x = np.arange(0, SecondsInYear * (plot_scale + 4) // 5 * 5 * 1.05,  SecondsInYear * (plot_scale + 4) // 5 * 5 * 1.05 / 1000)
-    ax.set_xlim([0, (plot_scale + 4) // 5 * 5 * SecondsInYear * 1.05])
-values_tokens = np.array([minted_tokens_number_calc(t, TotalSupply, KFS, u, FRC, ParticipantsNum, number_of_purchased_licenses) for t in values_x])
-min_y_value = min(list(values_tokens))
-max_y_value = max(list(values_tokens))
-ax.plot(values_x, values_tokens, color = "Red")
-ax.set_ylim([min_y_value, max_y_value * dec(1.2)])
-y_ticks = ax.get_yticks()
-if max_y_value > 10 ** 9:
-    ax.set_ylabel(r'Minted Token Amount (in billions)')
-    if any(y_tick % 1e9 != 0 for y_tick in y_ticks):
-        new_labels = [f'{y_tick / 1e9:.1f}' for y_tick in y_ticks]
+    fig, ax = plt.subplots()
+    if plot_scale <= 15:
+        values_x = np.arange(0, plot_scale * SecondsInYear * 1.05,  plot_scale * SecondsInYear * 1.05 / 1000)
+        ax.set_xlim([0, plot_scale * SecondsInYear * 1.05])
     else:
-        new_labels = [f'{int(y_tick / 1e9)}' for y_tick in y_ticks]
-elif max_y_value > 10 ** 6:
-    ax.set_ylabel(r'Minted Token Amount (in millions)')
-    if any(y_tick % 1e6 != 0 for y_tick in y_ticks):
-        new_labels = [f'{y_tick / 1e6:.1f}' for y_tick in y_ticks]
+        values_x = np.arange(0, SecondsInYear * (plot_scale + 4) // 5 * 5 * 1.05,  SecondsInYear * (plot_scale + 4) // 5 * 5 * 1.05 / 1000)
+        ax.set_xlim([0, (plot_scale + 4) // 5 * 5 * SecondsInYear * 1.05])
+    values_tokens = np.array([minted_tokens_number_calc(t, TotalSupply, KFS, u, FRC, ParticipantsNum, number_of_purchased_licenses) for t in values_x])
+    min_y_value = min(list(values_tokens))
+    max_y_value = max(list(values_tokens))
+    ax.plot(values_x, values_tokens, color = "Red")
+    ax.set_ylim([min_y_value, max_y_value * dec(1.2)])
+    y_ticks = ax.get_yticks()
+    if max_y_value > 10 ** 9:
+        ax.set_ylabel(r'Minted Token Amount (in billions)')
+        if any(y_tick % 1e9 != 0 for y_tick in y_ticks):
+            new_labels = [f'{y_tick / 1e9:.1f}' for y_tick in y_ticks]
+        else:
+            new_labels = [f'{int(y_tick / 1e9)}' for y_tick in y_ticks]
+    elif max_y_value > 10 ** 6:
+        ax.set_ylabel(r'Minted Token Amount (in millions)')
+        if any(y_tick % 1e6 != 0 for y_tick in y_ticks):
+            new_labels = [f'{y_tick / 1e6:.1f}' for y_tick in y_ticks]
+        else:
+            new_labels = [f'{int(y_tick / 1e6)}' for y_tick in y_ticks]
     else:
-        new_labels = [f'{int(y_tick / 1e6)}' for y_tick in y_ticks]
-else:
-    ax.set_ylabel(r'Minted Token Amount (in thousands)')
-    new_labels = [f'{int(y_tick / 1e3)}' for y_tick in y_ticks]
-new_labels[0] = '0'
-ax.set_yticklabels(new_labels)
+        ax.set_ylabel(r'Minted Token Amount (in thousands)')
+        new_labels = [f'{int(y_tick / 1e3)}' for y_tick in y_ticks]
+    new_labels[0] = '0'
+    ax.set_yticklabels(new_labels)
 
-if plot_scale == 1:
-    xlabels = list([i for i in range(0, plot_scale * 12 + 1, 1)])
-    xticks = list([i * SecondsInMonth for i in xlabels])
-    ax.set_xlabel(r'Time (in months)')
-if plot_scale == 2:
-    xlabels = list([i for i in range(0, plot_scale * 12 + 1, 2)])
-    xticks = list([i * SecondsInMonth for i in xlabels])
-    ax.set_xlabel(r'Time (in months)')
-if 3 <= plot_scale <= 5:
-    xlabels = list([i for i in range(0, plot_scale * 12 + 1, 5)])
-    xticks = list([i * SecondsInMonth for i in xlabels])
-    ax.set_xlabel(r'Time (in months)')
-if 6 <= plot_scale <= 15:
-    xlabels = list([i for i in range(0, plot_scale + 1, 1)])
-    xticks = list([i * SecondsInYear for i in xlabels])
-    ax.set_xlabel(r'Time (in years)')
-if plot_scale >= 16:
-    xlabels = list([i for i in range(0, (plot_scale + 4) // 5 * 5 + 1, 5)])
-    xticks = list([i * SecondsInYear for i in xlabels])
-    ax.set_xlabel(r'Time (in years)')
+    if plot_scale == 1:
+        xlabels = list([i for i in range(0, plot_scale * 12 + 1, 1)])
+        xticks = list([i * SecondsInMonth for i in xlabels])
+        ax.set_xlabel(r'Time (in months)')
+    if plot_scale == 2:
+        xlabels = list([i for i in range(0, plot_scale * 12 + 1, 2)])
+        xticks = list([i * SecondsInMonth for i in xlabels])
+        ax.set_xlabel(r'Time (in months)')
+    if 3 <= plot_scale <= 5:
+        xlabels = list([i for i in range(0, plot_scale * 12 + 1, 5)])
+        xticks = list([i * SecondsInMonth for i in xlabels])
+        ax.set_xlabel(r'Time (in months)')
+    if 6 <= plot_scale <= 15:
+        xlabels = list([i for i in range(0, plot_scale + 1, 1)])
+        xticks = list([i * SecondsInYear for i in xlabels])
+        ax.set_xlabel(r'Time (in years)')
+    if plot_scale >= 16:
+        xlabels = list([i for i in range(0, (plot_scale + 4) // 5 * 5 + 1, 5)])
+        xticks = list([i * SecondsInYear for i in xlabels])
+        ax.set_xlabel(r'Time (in years)')
 
-ax.set_xticks(xticks, xlabels)
-ax.grid(True)
-st.pyplot(fig)
+    ax.set_xticks(xticks, xlabels)
+    ax.grid(True)
+    st.pyplot(fig)
+
+
+
+
+
+
+
+
+
+
+
+
