@@ -253,15 +253,35 @@ def min_stake_from_vals_num(x, minValNum, maxValNum, cur_NV, cur_base_min_stake,
         return minStake
 
 
+TotalSupply = dec(10400000000)
+KFS = dec(10 ** (-5))
+TTMT = dec(2000000000)
+u = -dec(1) / TTMT * math.log(KFS / (dec(1) + KFS))
+SecondsInYear = 31557600
+
+
+
 st.title("Acki Nacki Tokenomics")
 
-plot_option = st.selectbox(
+node_type_option = st.selectbox(
    r"Select the type of node:",
    (r"Block Keeper", 
-    r"Block Manager",
-    r"Plots of the Acki-Nacki Consensus input parameters"),
+    r"Block Manager"),
    index=None,
 )
+
+node_price_option = st.selectbox(
+   r"Select the node license price:",
+   (r"1500$", 
+    1750),
+   index=None,
+)
+
+if node_type_option == r"Block Keeper":
+    FRC = 0.675 # Function Reward Coefficient
+
+if node_type_option == r"Block Manager":
+    FRC = 0.1 # Function Reward Coefficient
 
 # 1 plot
 
