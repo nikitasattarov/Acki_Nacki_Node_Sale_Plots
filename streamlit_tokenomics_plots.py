@@ -270,17 +270,38 @@ node_type_option = st.selectbox(
    index=None,
 )
 
-node_price_option = st.selectbox(
-   r"Select the node license price:",
-   (r"1500$", 
-    1750),
+if node_type_option == r"Block Keeper":
+    node_price_option = st.selectbox(
+    r"Select the node license price:",
+    (r"1500 $", 
+    r"1750 $", 
+    r"2041 $", 
+    r"2381 $", 
+    r"2778 $", 
+    r"3240 $", 
+    r"3780 $", 
+    r"4409 $", 
+    r"5143 $", 
+    r"6000 $"),
    index=None,
 )
-
-if node_type_option == r"Block Keeper":
     FRC = 0.675 # Function Reward Coefficient
 
 if node_type_option == r"Block Manager":
+    node_price_option = st.selectbox(
+    r"Select the node license price:",
+    (r"400 $", 
+    r"478 $", 
+    r"572 $", 
+    r"684 $", 
+    r"818 $", 
+    r"978 $", 
+    r"1170 $", 
+    r"1399 $", 
+    r"1673 $", 
+    r"2000 $"),
+   index=None,
+)
     FRC = 0.1 # Function Reward Coefficient
 
 # 1 plot
