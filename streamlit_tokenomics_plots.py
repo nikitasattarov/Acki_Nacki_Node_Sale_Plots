@@ -455,7 +455,6 @@ xticks = list([i * SecondsInYear for i in xlabels])
 ax.set_xticks(xticks, xlabels)
 ax.set_ylim([min_y_value, max_y_value * dec(1.2)])
 
-ax.legend()
 ax.grid(True)
 st.pyplot(fig)
 
