@@ -77,7 +77,7 @@ SecondsInMonth = 2629800
 
 
 
-st.title("Acki Nacki Tokenomics")
+st.title("Node Sale Plots")
 
 node_type_option = st.selectbox(
    r"Select the type of node:",
