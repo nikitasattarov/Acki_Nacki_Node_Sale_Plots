@@ -434,7 +434,7 @@ plot_scale = dec(input_plot_scale())
 # 1 plot
 
 fig, ax = plt.subplots()
-values_x = np.arange(dec(0), plot_scale * seconds_in_year,  plot_scale * seconds_in_year / dec(1000))
+values_x = np.arange(dec(0), plot_scale * SecondsInYear,  plot_scale * seconds_in_year / dec(1000))
 values_tokens = np.array([minted_tokens_number_calc(t, TotalSupply, KFS, u, FRC, ParticipantsNum) for t in values_x])
 
 #min_x_value = min(list(values_x))
@@ -451,7 +451,7 @@ ax.set_ylabel(r'Minted Token Amount')
 #ylabels = list([0, 2, 4, 6, 8, 10.4])
 #ax.set_yticks(yticks, ylabels)
 xlabels = list([i for i in range(0, plot_scale, 5)])
-xticks = list([i * seconds_in_year for i in xlabels])
+xticks = list([i * SecondsInYear for i in xlabels])
 ax.set_xticks(xticks, xlabels)
 ax.set_ylim([min_y_value, max_y_value * dec(1.2)])
 
