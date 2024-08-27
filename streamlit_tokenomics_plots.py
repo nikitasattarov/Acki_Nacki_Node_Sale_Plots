@@ -155,6 +155,13 @@ if node_type_option == r"Block Keeper":
     #raised_amount = node_license_price * number_of_licenses_per_tier
     implied_1_y_token_price = (node_license_price + server_monthly_cost * 12) / expected_bk_apy
     st.markdown(f"<h2 style='font-weight:bold;'>Implied 1Y Token Price ($) = {round(implied_1_y_token_price, 7)} </h2>", unsafe_allow_html=True)
+    st.text_input(
+    label="",
+    value="",
+    help="Implied 1Y Token Price is the estimated price of the token after one year.",
+    disabled=True,
+    placeholder="?"
+)
     plot_scale = input_plot_scale()
 
     fig, ax = plt.subplots()
