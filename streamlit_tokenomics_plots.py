@@ -38,21 +38,25 @@ def expected_apy_calc(TotalSupply, KFS, u_tokens, SecondsInYear, FRC, Participan
 def input_number_of_licenses_per_tier_bk(ParticipantsNum):
     return st.number_input(
         label = r'Insert a number of licenses', 
-        help = r"Number of licenses is in $ \left\lbrack 1, \min\left(200, \ \text{Number of Block Keepers}\right) \right\rbrack $", 
+        #help = r"Number of licenses is in $ \left\lbrack 1, \min\left(200, \ \text{Number of Block Keepers}\right) \right\rbrack $", 
+        help = r"Number of licenses is in $ \left\lbrack 1, \text{Number of Block Keepers} \right\rbrack $", 
         value = 1, 
         format = "%i",
         min_value = 1,
-        max_value = min(200, int(ParticipantsNum))
+        #max_value = min(200, int(ParticipantsNum))
+        max_value = int(ParticipantsNum)
         )
 
 def input_number_of_licenses_per_tier_bm(ParticipantsNum):
     return st.number_input(
         label = r'Insert a number of licenses', 
-        help = r"Number of licenses is in $ \left\lbrack 1, \min\left(200, \ \text{Number of Block Managers}\right) \right\rbrack $", 
+        #help = r"Number of licenses is in $ \left\lbrack 1, \min\left(200, \ \text{Number of Block Managers}\right) \right\rbrack $", 
+        help = r"Number of licenses is in $ \left\lbrack 1, \text{Number of Block Managers} \right\rbrack $", 
         value = 1, 
         format = "%i",
         min_value = 1,
-        max_value = min(200, int(ParticipantsNum))
+        #max_value = min(200, int(ParticipantsNum))
+        max_value = int(ParticipantsNum)
         )
 
 def input_server_running_monhtly_cost():
