@@ -197,7 +197,7 @@ new_labels = [f'{int(y_tick / 1e3)}' for y_tick in y_ticks]
 new_labels[0] = '0'
 ax.set_yticklabels(new_labels)
 min_x_value = min(list(values_x))
-ax.set_xlim([min_x_value, plot_scale * SecondsInYear])
+ax.set_xlim([min_x_value, plot_scale * SecondsInYear * 1.05])
 
 if plot_scale <= 2:
     xlabels = list([i for i in range(0, plot_scale * 12 + 1, 1)])
