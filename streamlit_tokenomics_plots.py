@@ -159,7 +159,7 @@ if node_type_option == r"Block Keeper":
     Implied 1Y Token Price is the total yearly expenses divided by the APY.
     If the token price exceeds this value, you will make a profit calculated as:
 
-    P = (token price - implied token price) * APY
+    $P = \left(\text{token price} - \text{implied token price} \right) \cdot \text{APY}$
     """, icon="ℹ️")
     plot_scale = input_plot_scale()
 
