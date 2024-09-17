@@ -293,7 +293,7 @@ if node_type_option == r"Block Manager":
     values_tokens = np.array([minted_tokens_number_calc(t, TotalSupply, KFS, u_tokens, FRC, ParticipantsNum, number_of_purchased_licenses) for t in values_x])
     min_y_value = min(list(values_tokens))
     max_y_value = max(list(values_tokens))
-    ax.plot(values_x, values_tokens, color = "Red")
+    ax.plot(values_x, values_tokens, color = "Red", label = "Block Manager Minted Tokens")
     ax.set_ylim([min_y_value, max_y_value * dec(1.2)])
     y_ticks = ax.get_yticks()
     if max_y_value > 10 ** 9:
