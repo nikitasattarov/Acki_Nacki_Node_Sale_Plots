@@ -335,7 +335,7 @@ if node_type_option == r"Block Manager":
         xticks = list([i * SecondsInYear for i in xlabels])
         ax.set_xlabel(r'Time (in years)')
 
-    plt.legend(True)
+    ax.legend(True)
     ax.set_xticks(xticks, xlabels)
     ax.grid(True)
     st.pyplot(fig)
