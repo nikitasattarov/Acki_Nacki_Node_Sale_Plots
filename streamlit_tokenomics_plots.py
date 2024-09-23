@@ -156,7 +156,7 @@ if node_type_option == r"Block Keeper":
     implied_1_y_token_price = (node_license_price + server_monthly_cost * 12) / expected_bk_apy
     st.markdown(f"<h2 style='font-weight:bold;'>Implied 1Y Token Price ($) = {round(implied_1_y_token_price, 7)} </h2>", unsafe_allow_html=True)
     st.info(r"""
-    Implied 1Y Token Price is the total yearly expenses divided by the ATR (Annual Token Reward).     
+    Implied 1Y Token Price is the total yearly expenses multiplied by the ATR (Annual Token Reward).     
     If the token price exceeds this value, you will make a profit calculated as:    
     $P = \left(\text{Token Price} - \text{Implied 1Y Token Price} \right) \cdot \text{ATR}$
     """, icon="ℹ️")
@@ -277,7 +277,7 @@ if node_type_option == r"Block Manager":
     implied_1_y_token_price = (node_license_price + server_monthly_cost * 12) / expected_bm_apy
     st.markdown(f"<h2 style='font-weight:bold;'>Implied 1Y Token Price ($) = {round(implied_1_y_token_price, 7)} </h2>", unsafe_allow_html=True)
     st.info(r"""
-    Implied 1Y Token Price is the total yearly expenses divided by the ATR (Annual Token Reward).     
+    Implied 1Y Token Price is the total yearly expenses multiplied by the ATR (Annual Token Reward).     
     If the token price exceeds this value, you will make a profit calculated as:    
     $P = \left(\text{Token Price} - \text{Implied 1Y Token Price} \right) \cdot \text{ATR}$
     """, icon="ℹ️")
@@ -293,7 +293,7 @@ if node_type_option == r"Block Manager":
     values_tokens = np.array([minted_tokens_number_calc(t, TotalSupply, KFS, u_tokens, FRC, ParticipantsNum, number_of_purchased_licenses) for t in values_x])
     values_ff = np.array([minted_tokens_number_calc(t, TotalSupply, KFS, u_tokens, FRC, ParticipantsNum, number_of_purchased_licenses) * free_float(t, FFF, maxFF, u_ff) for t in values_x])
     values_stake = (values_tokens - values_ff)
-    min_y_value = min(list(values_tokens)) 
+    min_y_value = min(list(values_tokens))
     max_y_value = max(list(values_tokens))
     ax.plot(values_x, values_tokens, color = "Red", label = "Block Manager Minted Tokens")
     ax.plot(values_x, values_ff, color = "Blue", label = "Block Manager Free Float Tokens")
