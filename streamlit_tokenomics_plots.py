@@ -291,25 +291,29 @@ if node_type_option == r"Block Manager":
         values_x = np.arange(0, SecondsInYear * (plot_scale + 4) // 5 * 5 * 1.05,  SecondsInYear * (plot_scale + 4) // 5 * 5 * 1.05 / 1000)
         ax.set_xlim([0, (plot_scale + 4) // 5 * 5 * SecondsInYear * 1.05])
     values_tokens = np.array([minted_tokens_number_calc(t, TotalSupply, KFS, u_tokens, FRC, ParticipantsNum, number_of_purchased_licenses) for t in values_x])
+    values_ff = np.array([minted_tokens_number_calc(t, TotalSupply, KFS, u_tokens, FRC, ParticipantsNum, number_of_purchased_licenses) * free_float(t, FFF, maxFF, u_ff) for t in values_x])
+    values_stake = (values_tokens - values_ff)
     min_y_value = min(list(values_tokens))
     max_y_value = max(list(values_tokens))
     ax.plot(values_x, values_tokens, color = "Red", label = "Block Manager Minted Tokens")
+    ax.plot(values_x, values_ff, color = "Blue", label = "Block Manager Free Float Tokens")
+    ax.plot(values_x, values_stake, color = "Black", label = "Block Manager Minimum Staked Tokens")
     ax.set_ylim([min_y_value, max_y_value * dec(1.2)])
     y_ticks = ax.get_yticks()
     if max_y_value > 10 ** 9:
-        ax.set_ylabel(r'Minted Token Amount (in billions)')
+        ax.set_ylabel(r'Token Amount (in billions)')
         if any(y_tick % 1e9 != 0 for y_tick in y_ticks):
             new_labels = [f'{y_tick / 1e9:.1f}' for y_tick in y_ticks]
         else:
             new_labels = [f'{int(y_tick / 1e9)}' for y_tick in y_ticks]
     elif max_y_value > 10 ** 6:
-        ax.set_ylabel(r'Minted Token Amount (in millions)')
+        ax.set_ylabel(r'Token Amount (in millions)')
         if any(y_tick % 1e6 != 0 for y_tick in y_ticks):
             new_labels = [f'{y_tick / 1e6:.1f}' for y_tick in y_ticks]
         else:
             new_labels = [f'{int(y_tick / 1e6)}' for y_tick in y_ticks]
     else:
-        ax.set_ylabel(r'Minted Token Amount (in thousands)')
+        ax.set_ylabel(r'Token Amount (in thousands)')
         new_labels = [f'{int(y_tick / 1e3)}' for y_tick in y_ticks]
     new_labels[0] = '0'
     ax.set_yticklabels(new_labels)
