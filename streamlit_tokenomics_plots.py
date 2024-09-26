@@ -221,7 +221,13 @@ if node_type_option == r"Block Keeper":
     ax.grid(True)
     st.pyplot(fig)
 
-    values_stake_pct = np.divide(values_stake, values_tokens)
+
+
+
+    values_tokens = np.array([minted_tokens_number_calc(t, TotalSupply, KFS, u_tokens, FRC, ParticipantsNum, number_of_purchased_licenses) for t in values_x])
+    values_ff = np.array([minted_tokens_number_calc(t, TotalSupply, KFS, u_tokens, FRC, ParticipantsNum, number_of_purchased_licenses) * free_float(t, FFF, maxFF, u_ff) for t in values_x])
+    values_stake = (values_tokens - values_ff)
+    values_stake_pct = np.array([(dec(1) - free_float(t, FFF, maxFF, u_ff)) for t in values_x])
     min_y_value = min(list(values_tokens))
     max_y_value = max(list(values_tokens))
     ax.plot(values_x, values_stake_pct, color = "Black", label = "Block Keeper Staked Tokens (Fraction of Supply)")
