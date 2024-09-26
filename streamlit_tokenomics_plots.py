@@ -360,6 +360,7 @@ if node_type_option == r"Block Manager":
 
 
 
+    fig, ax = plt.subplots()
     values_stake_pct = np.array([(dec(1) - free_float(t, FFF, maxFF, u_ff)) for t in values_x])
     st.write(values_stake_pct)
     min_y_value = min(list(values_stake_pct))
