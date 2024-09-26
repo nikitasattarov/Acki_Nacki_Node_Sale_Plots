@@ -355,21 +355,3 @@ if node_type_option == r"Block Manager":
 
 
 
-
-
-
-
-
-    fig, ax = plt.subplots()
-    values_x = np.arange(0, SecondsInYear * 6,  SecondsInYear * 6/ 1000)
-    values_stake_pct = np.array([(dec(1) - free_float(t, FFF, maxFF, u_ff)) for t in values_x])
-    st.write(values_stake_pct)
-    min_y_value = min(list(values_stake_pct))
-    max_y_value = max(list(values_stake_pct))
-    ax.plot(values_x, values_stake_pct, color = "Black", label = "Block Keeper Staked Tokens (Fraction of Supply)")
-    ax.set_ylabel(r'Fraction of Supply')
-    ax.set_ylim([min_y_value, max_y_value * dec(1.2)])
-    ax.set_xlabel(r'Time (in years)')
-    ax.legend()
-    ax.grid(True)
-    st.pyplot(fig)
