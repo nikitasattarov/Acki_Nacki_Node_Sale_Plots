@@ -225,7 +225,30 @@ if node_type_option == r"Block Keeper":
     min_y_value = min(list(values_tokens))
     max_y_value = max(list(values_tokens))
     ax.plot(values_x, values_stake_pct, color = "Black", label = "Block Keeper Staked Tokens (Fraction of Supply)")
+    ax.set_ylabel(r'Fraction of Supply')
     ax.set_ylim([min_y_value, max_y_value * dec(1.2)])
+    new_labels[0] = '0'
+    ax.set_yticklabels(new_labels)
+    if plot_scale == 1:
+        xlabels = list([i for i in range(0, plot_scale * 12 + 1, 1)])
+        xticks = list([i * SecondsInMonth for i in xlabels])
+        ax.set_xlabel(r'Time (in months)')
+    if plot_scale == 2:
+        xlabels = list([i for i in range(0, plot_scale * 12 + 1, 2)])
+        xticks = list([i * SecondsInMonth for i in xlabels])
+        ax.set_xlabel(r'Time (in months)')
+    if 3 <= plot_scale <= 5:
+        xlabels = list([i for i in range(0, plot_scale * 12 + 1, 5)])
+        xticks = list([i * SecondsInMonth for i in xlabels])
+        ax.set_xlabel(r'Time (in months)')
+    if 6 <= plot_scale <= 15:
+        xlabels = list([i for i in range(0, plot_scale + 1, 1)])
+        xticks = list([i * SecondsInYear for i in xlabels])
+        ax.set_xlabel(r'Time (in years)')
+    if plot_scale >= 16:
+        xlabels = list([i for i in range(0, (plot_scale + 4) // 5 * 5 + 1, 5)])
+        xticks = list([i * SecondsInYear for i in xlabels])
+        ax.set_xlabel(r'Time (in years)')
     ax.legend()
     ax.grid(True)
     st.pyplot(fig)
