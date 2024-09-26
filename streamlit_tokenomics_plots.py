@@ -255,6 +255,7 @@ if node_type_option == r"Block Keeper":
         xlabels = list([i for i in range(0, (plot_scale + 4) // 5 * 5 + 1, 5)])
         xticks = list([i * SecondsInYear for i in xlabels])
         ax.set_xlabel(r'Time (in years)')
+    ax.set_xticks(xticks, xlabels)
     ax.legend()
     ax.grid(True)
     st.pyplot(fig)
