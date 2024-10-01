@@ -258,7 +258,7 @@ if node_type_option == r"Block Manager":
     if node_price_option == r"1170":
         node_license_price = dec(1170)
         #number_of_licenses_per_tier = dec(530)
-    if node_price_option == r"1399 $":
+    if node_price_option == r"1399":
         node_license_price = dec(1399)
         #number_of_licenses_per_tier = dec(454)
     if node_price_option == r"1673":
