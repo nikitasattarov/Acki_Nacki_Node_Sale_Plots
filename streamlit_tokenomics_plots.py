@@ -170,9 +170,9 @@ if node_type_option == r"Block Keeper":
     implied_token_price = (node_license_price + server_monthly_cost * 12) / expected_bk_reward
     TMTA = TMTA_calc(YearsNumber * SecondsInYear, TotalSupply, KFS, u_tokens)
     implied_fdv = TMTA * implied_token_price
-    st.markdown(f"<h2 style='font-weight:bold;'>Total Minted Token Amount (NACKL) = {round(TMTA, 5)} </h2>", unsafe_allow_html=True)
+    st.markdown(f"<h2 style='font-weight:bold;'>Total Minted Token Amount (NACKL) = {round(TMTA, 0)} </h2>", unsafe_allow_html=True)
     st.markdown(f"<h2 style='font-weight:bold;'>Implied {YearsNumber}Y Token Price ($) = {round(implied_token_price, 7)} </h2>", unsafe_allow_html=True)
-    st.markdown(f"<h2 style='font-weight:bold;'>Implied {YearsNumber}Y Tier FDV ($) = {round(implied_fdv, 5)} </h2>", unsafe_allow_html=True)
+    st.markdown(f"<h2 style='font-weight:bold;'>Implied {YearsNumber}Y Tier FDV ($) = {round(implied_fdv, 0)} </h2>", unsafe_allow_html=True)
     st.info(rf"""
     Implied {YearsNumber}Y Token Price is the total expenses over {YearsNumber} years divided by the ATR (Annual Token Reward).     
     If the token price exceeds this value, you will make a profit calculated as:    
