@@ -32,8 +32,8 @@ def input_number_of_block_managers():
         max_value = 10000
         )
 
-def expected_apy_calc(TotalSupply, KFS, u_tokens, SecondsInYear, FRC, ParticipantsNum):
-    return FRC * TotalSupply * (dec(1) + KFS) * (dec(1) - dec(math.exp(-u_tokens* dec(SecondsInYear)))) / ParticipantsNum
+def expected_apy_calc(YearsNumber, TotalSupply, KFS, u_tokens, SecondsInYear, FRC, ParticipantsNum):
+    return FRC * TotalSupply * (dec(1) + KFS) * (dec(1) - dec(math.exp(-u_tokens * dec(YearsNumber) * dec(SecondsInYear)))) / ParticipantsNum
 
 def input_number_of_licenses_per_tier_bk(ParticipantsNum):
     return st.number_input(
@@ -66,6 +66,16 @@ def input_server_running_monhtly_cost():
         format = "%i",
         )
 
+def input_years_number():
+    return st.number_input(
+        label = r'Insert the number of years since the network launch', 
+        help = r"Number of years since the network launch is in $ \lbrack 1, 5\rbrack $", 
+        value = 1, 
+        format = "%i",
+        min_value = 1,
+        max_value = 5
+        )
+
 def input_plot_scale():
     return st.number_input(
         label = r'Insert a plot scale (in years)', 
@@ -75,6 +85,9 @@ def input_plot_scale():
         min_value = 1,
         max_value = 60
         )
+
+def TMTA_calc(t, TotalSupply, KFS, u_tokens):
+    return TotalSupply * (dec(1) + KFS) * (dec(1) - dec(math.exp(-u_tokens* dec(t))))
 
 def minted_tokens_number_calc(t, TotalSupply, KFS, u_tokens, FRC, ParticipantsNum, number_of_purchased_licenses):
     return FRC * TotalSupply * (dec(1) + KFS) * (dec(1) - dec(math.exp(-u_tokens* dec(t)))) / ParticipantsNum * number_of_purchased_licenses
@@ -150,15 +163,20 @@ if node_type_option == r"Block Keeper":
     ParticipantsNum = dec(input_number_of_block_keepers())
     number_of_purchased_licenses = dec(input_number_of_licenses_per_tier_bk(ParticipantsNum))
     server_monthly_cost = dec(input_server_running_monhtly_cost())
+    YearsNumber = dec(input_years_number())
     FRC = dec(0.675) # Function Reward Coefficient
-    expected_bk_apy = expected_apy_calc(TotalSupply, KFS, u_tokens, SecondsInYear, FRC, ParticipantsNum)
+    expected_bk_reward = expected_apy_calc(YearsNumber, TotalSupply, KFS, u_tokens, SecondsInYear, FRC, ParticipantsNum)
     #raised_amount = node_license_price * number_of_licenses_per_tier
-    implied_1_y_token_price = (node_license_price + server_monthly_cost * 12) / expected_bk_apy
-    st.markdown(f"<h2 style='font-weight:bold;'>Implied 1Y Token Price ($) = {round(implied_1_y_token_price, 7)} </h2>", unsafe_allow_html=True)
-    st.info(r"""
-    Implied 1Y Token Price is the total yearly expenses multiplied by the ATR (Annual Token Reward).     
+    implied_token_price = (node_license_price + server_monthly_cost * 12) / expected_bk_reward
+    TMTA = TMTA_calc(YearsNumber * SecondsInYear, TotalSupply, KFS, u_tokens)
+    implied_fdv = TMTA * implied_token_price
+    st.markdown(f"<h2 style='font-weight:bold;'>Total Minted Token Amount (NACKL) = {round(TMTA, 5)} </h2>", unsafe_allow_html=True)
+    st.markdown(f"<h2 style='font-weight:bold;'>Implied {YearsNumber}Y Token Price ($) = {round(implied_token_price, 7)} </h2>", unsafe_allow_html=True)
+    st.markdown(f"<h2 style='font-weight:bold;'>Implied {YearsNumber}Y Tier FDV ($) = {round(implied_fdv, 5)} </h2>", unsafe_allow_html=True)
+    st.info(rf"""
+    Implied {YearsNumber}Y Token Price is the total expenses over {YearsNumber} years divided by the ATR (Annual Token Reward).     
     If the token price exceeds this value, you will make a profit calculated as:    
-    $P = \left(\text{Token Price} - \text{Implied 1Y Token Price} \right) \cdot \text{ATR}$
+    $P = \left(\text{{Token Price}} - \text{{Implied {YearsNumber}Y Token Price}} \right) \cdot \text{{ATR}}$
     """, icon="ℹ️")
     plot_scale = input_plot_scale()
 
@@ -271,10 +289,11 @@ if node_type_option == r"Block Manager":
     number_of_purchased_licenses = dec(input_number_of_licenses_per_tier_bm(ParticipantsNum))
     server_monthly_cost = dec(input_server_running_monhtly_cost())
     FRC = dec(0.1) # Function Reward Coefficient
-    expected_bm_apy = expected_apy_calc(TotalSupply, KFS, u_tokens, SecondsInYear, FRC, ParticipantsNum)
+    expected_bm_reward = expected_apy_calc(TotalSupply, KFS, u_tokens, SecondsInYear, FRC, ParticipantsNum)
     #raised_amount = node_license_price * number_of_licenses_per_tier
-    implied_1_y_token_price = (node_license_price + server_monthly_cost * 12) / expected_bm_apy
-    st.markdown(f"<h2 style='font-weight:bold;'>Implied 1Y Token Price ($) = {round(implied_1_y_token_price, 7)} </h2>", unsafe_allow_html=True)
+    implied_token_price = (node_license_price + server_monthly_cost * 12) / expected_bm_reward
+    implied_tier_fdv = (implied_token_price) * 
+    st.markdown(f"<h2 style='font-weight:bold;'>Implied 1Y Token Price ($) = {round(implied_token_price, 7)} </h2>", unsafe_allow_html=True)
     st.info(r"""
     Implied 1Y Token Price is the total yearly expenses multiplied by the ATR (Annual Token Reward).     
     If the token price exceeds this value, you will make a profit calculated as:    
