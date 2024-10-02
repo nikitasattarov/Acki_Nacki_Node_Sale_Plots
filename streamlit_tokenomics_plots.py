@@ -174,10 +174,13 @@ if node_type_option == r"Block Keeper":
     st.markdown(f"<h2 style='font-weight:bold;'>Implied {YearsNumber}Y Reward (NACKL) = {"{:,}".format(round(expected_bk_reward, 0))} </h2>", unsafe_allow_html=True)
     st.markdown(f"<h2 style='font-weight:bold;'>Implied {YearsNumber}Y Token Price ($) = {round(implied_token_price, 7)} </h2>", unsafe_allow_html=True)
     st.markdown(f"<h2 style='font-weight:bold;'>Implied {YearsNumber}Y Tier FDV ($) = {"{:,}".format(round(implied_fdv, 0))} </h2>", unsafe_allow_html=True)
+    
     st.info(rf"""
-    Implied {YearsNumber}Y Token Price is the total expenses over {YearsNumber} years divided by the ATR (Annual Token Reward).     
+    Implied {YearsNumber}Y Reward is the amount of NACKL that a network participant will receive over {YearsNumber}Y.
+    Implied {YearsNumber}Y Token Price is the total expenses over {YearsNumber}Y divided by the Implied {YearsNumber}Y Reward.     
     If the token price exceeds this value, you will make a profit calculated as:    
     $P = \left(\text{{Token Price}} - \text{{Implied {YearsNumber}Y Token Price}} \right) \cdot \text{{ATR}}$
+    Implied {YearsNumber}Y Tier FDV is the Implied {YearsNumber}Y Token Price multiplied by the Total Minted Token Amount after {YearsNumber}Y.
     """, icon="ℹ️")
     plot_scale = input_plot_scale()
 
