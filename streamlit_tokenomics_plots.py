@@ -171,7 +171,7 @@ if node_type_option == r"Block Keeper":
     TMTA = TMTA_calc(YearsNumber * SecondsInYear, TotalSupply, KFS, u_tokens)
     implied_fdv = TMTA * implied_token_price
     st.markdown(f"<h2 style='font-weight:bold;'>Total Minted Token Amount (NACKL) = {"{:,}".format(round(TMTA, 0))} </h2>", unsafe_allow_html=True)
-    st.markdown(f"<h2 style='font-weight:bold;'>Implied Reward (NACKL) = {"{:,}".format(round(expected_bk_reward, 0))} </h2>", unsafe_allow_html=True)
+    st.markdown(f"<h2 style='font-weight:bold;'>Implied {YearsNumber}Y Reward (NACKL) = {"{:,}".format(round(expected_bk_reward, 0))} </h2>", unsafe_allow_html=True)
     st.markdown(f"<h2 style='font-weight:bold;'>Implied {YearsNumber}Y Token Price ($) = {round(implied_token_price, 7)} </h2>", unsafe_allow_html=True)
     st.markdown(f"<h2 style='font-weight:bold;'>Implied {YearsNumber}Y Tier FDV ($) = {"{:,}".format(round(implied_fdv, 0))} </h2>", unsafe_allow_html=True)
     st.info(rf"""
