@@ -165,9 +165,9 @@ if node_type_option == r"Block Keeper":
     server_monthly_cost = dec(input_server_running_monhtly_cost())
     YearsNumber = dec(input_years_number())
     FRC = dec(0.675) # Function Reward Coefficient
-    expected_bk_reward = expected_apy_calc(YearsNumber, TotalSupply, KFS, u_tokens, SecondsInYear, FRC, ParticipantsNum)
+    expected_bk_reward = expected_apy_calc(YearsNumber, TotalSupply, KFS, u_tokens, SecondsInYear, FRC, ParticipantsNum) * number_of_purchased_licenses
     #raised_amount = node_license_price * number_of_licenses_per_tier
-    implied_token_price = (node_license_price + server_monthly_cost * 12 * YearsNumber) / expected_bk_reward
+    implied_token_price = (node_license_price + server_monthly_cost * 12 * YearsNumber) * number_of_purchased_licenses / expected_bk_reward
     TMTA = TMTA_calc(YearsNumber * SecondsInYear, TotalSupply, KFS, u_tokens)
     implied_fdv = TMTA * implied_token_price
     st.markdown(f"<h2 style='font-weight:bold;'>Total Minted Token Amount (NACKL) = {"{:,}".format(round(TMTA, 0))} </h2>", unsafe_allow_html=True)
