@@ -13,20 +13,22 @@ def dec(number):
     return(Decimal(str(number)))
 
 def input_number_of_block_keepers():
-    return st.number_input(
-        label = r'Insert a total number of Block Keepers', 
+    # Получаем текущее значение
+    number_of_block_keepers = st.number_input(
+        label = f'Insert a total number of Block Keepers (assuming {number_of_block_keepers / 10000 * 100}% node participation)', 
         help = r"Number of Block Keepers is in $ \lbrack 100, 10000 \rbrack $", 
-        value = 10000, 
+        value = 7500, 
         format = "%i",
         min_value = 100,
         max_value = 10000
-        )
+    )
+    return number_of_block_keepers
 
 def input_number_of_block_managers():
     return st.number_input(
         label = r'Insert a total number of Block Managers', 
         help = r"Number of Block Managers is in $ \lbrack 100, 10000 \rbrack $", 
-        value = 10000, 
+        value = 7500, 
         format = "%i",
         min_value = 100,
         max_value = 10000
