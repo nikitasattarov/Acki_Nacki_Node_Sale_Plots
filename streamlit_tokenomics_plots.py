@@ -180,6 +180,7 @@ if node_type_option == r"Block Keeper":
     Implied {YearsNumber}Y Token Price is the total expenses over {YearsNumber}Y divided by the Implied {YearsNumber}Y Reward.     
     If the Token Price exceeds Implied {YearsNumber}Y Token Price, you will make a profit calculated as:    
     $P = \left(\text{{Token Price}} - \text{{Implied {YearsNumber}Y Token Price}} \right) \cdot \text{{Implied {YearsNumber}Y Reward}}$
+    
     Implied {YearsNumber}Y Tier FDV is the Implied {YearsNumber}Y Token Price multiplied by the Total Minted Token Amount after {YearsNumber}Y.
     """, icon="ℹ️")
     plot_scale = input_plot_scale()
