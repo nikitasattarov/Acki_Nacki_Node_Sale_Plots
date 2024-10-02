@@ -292,7 +292,6 @@ if node_type_option == r"Block Manager":
     expected_bm_reward = expected_apy_calc(TotalSupply, KFS, u_tokens, SecondsInYear, FRC, ParticipantsNum)
     #raised_amount = node_license_price * number_of_licenses_per_tier
     implied_token_price = (node_license_price + server_monthly_cost * 12) / expected_bm_reward
-    implied_tier_fdv = (implied_token_price) * 
     st.markdown(f"<h2 style='font-weight:bold;'>Implied 1Y Token Price ($) = {round(implied_token_price, 7)} </h2>", unsafe_allow_html=True)
     st.info(r"""
     Implied 1Y Token Price is the total yearly expenses multiplied by the ATR (Annual Token Reward).     
