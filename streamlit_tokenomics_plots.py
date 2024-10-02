@@ -292,15 +292,24 @@ if node_type_option == r"Block Manager":
     ParticipantsNum = dec(input_number_of_block_managers())
     number_of_purchased_licenses = dec(input_number_of_licenses_per_tier_bm(ParticipantsNum))
     server_monthly_cost = dec(input_server_running_monhtly_cost())
+    YearsNumber = dec(input_years_number())
     FRC = dec(0.1) # Function Reward Coefficient
-    expected_bm_reward = expected_apy_calc(TotalSupply, KFS, u_tokens, SecondsInYear, FRC, ParticipantsNum)
+    expected_bm_reward = expected_apy_calc(YearsNumber, TotalSupply, KFS, u_tokens, SecondsInYear, FRC, ParticipantsNum) * number_of_purchased_licenses
     #raised_amount = node_license_price * number_of_licenses_per_tier
-    implied_token_price = (node_license_price + server_monthly_cost * 12) / expected_bm_reward
-    st.markdown(f"<h2 style='font-weight:bold;'>Implied 1Y Token Price ($) = {round(implied_token_price, 7)} </h2>", unsafe_allow_html=True)
-    st.info(r"""
-    Implied 1Y Token Price is the total yearly expenses multiplied by the ATR (Annual Token Reward).     
-    If the token price exceeds this value, you will make a profit calculated as:    
-    $P = \left(\text{Token Price} - \text{Implied 1Y Token Price} \right) \cdot \text{ATR}$
+    implied_token_price = (node_license_price + server_monthly_cost * 12 * YearsNumber) * number_of_purchased_licenses / expected_bk_reward
+    TMTA = TMTA_calc(YearsNumber * SecondsInYear, TotalSupply, KFS, u_tokens)
+    implied_fdv = TMTA * implied_token_price
+    st.markdown(f"<h2 style='font-weight:bold;'>Total Minted Token Amount (NACKL) = {"{:,}".format(round(TMTA, 0))} </h2>", unsafe_allow_html=True)
+    st.markdown(f"<h2 style='font-weight:bold;'>Implied {YearsNumber}Y Reward (NACKL) = {"{:,}".format(round(expected_bm_reward, 0))} </h2>", unsafe_allow_html=True)
+    st.markdown(f"<h2 style='font-weight:bold;'>Implied {YearsNumber}Y Token Price ($) = {round(implied_token_price, 7)} </h2>", unsafe_allow_html=True)
+    st.markdown(f"<h2 style='font-weight:bold;'>Implied {YearsNumber}Y Tier FDV ($) = {"{:,}".format(round(implied_fdv, 0))} </h2>", unsafe_allow_html=True)
+    
+    st.info(rf"""
+    Implied {YearsNumber}Y Reward is the amount of NACKL that a network participant will receive over {YearsNumber}Y.
+    Implied {YearsNumber}Y Token Price is the total expenses over {YearsNumber}Y divided by the Implied {YearsNumber}Y Reward.     
+    If the Token Price exceeds Implied {YearsNumber}Y Token Price, you will make a profit calculated as:    
+    $P = \left(\text{{Token Price}} - \text{{Implied {YearsNumber}Y Token Price}} \right) \cdot \text{{Implied {YearsNumber}Y Reward}}$     
+    Implied {YearsNumber}Y Tier FDV is the Implied {YearsNumber}Y Token Price multiplied by the Total Minted Token Amount after {YearsNumber}Y.
     """, icon="ℹ️")
     plot_scale = input_plot_scale()
 
