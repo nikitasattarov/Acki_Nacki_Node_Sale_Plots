@@ -13,16 +13,14 @@ def dec(number):
     return(Decimal(str(number)))
 
 def input_number_of_block_keepers():
-    # Получаем текущее значение
-    number_of_block_keepers = st.number_input(
-        label = f'Insert a total number of Block Keepers (assuming {number_of_block_keepers / 10000 * 100}% node participation)', 
+    return st.number_input(
+        label = r'Insert a total number of Block Keepers', 
         help = r"Number of Block Keepers is in $ \lbrack 100, 10000 \rbrack $", 
         value = 7500, 
         format = "%i",
         min_value = 100,
         max_value = 10000
-    )
-    return number_of_block_keepers
+        )
 
 def input_number_of_block_managers():
     return st.number_input(
@@ -163,6 +161,7 @@ if node_type_option == r"Block Keeper":
         node_license_price = dec(6000)
         #number_of_licenses_per_tier = dec(276)
     ParticipantsNum = dec(input_number_of_block_keepers())
+    st.write(f"assuming {ParticipantsNum / 10000 * 100}% node participation")
     number_of_purchased_licenses = dec(input_number_of_licenses_per_tier_bk(ParticipantsNum))
     server_monthly_cost = dec(input_server_running_monhtly_cost())
     YearsNumber = dec(input_years_number())
