@@ -12,6 +12,26 @@ def dec(number):
     #return(number)
     return(Decimal(str(number)))
 
+def input_bk_node_license_price():
+    return st.number_input(
+        label = r'Insert a node license price ($)', 
+        help = r"Node license price is in $ \lbrack 10, 10000\rbrack $", 
+        value = 1500, 
+        format = "%i",
+        min_value = 10,
+        max_value = 10000
+        )
+
+def input_bm_node_license_price():
+    return st.number_input(
+        label = r'Insert a node license price ($)', 
+        help = r"Node license price is in $ \lbrack 10, 10000\rbrack $", 
+        value = 400, 
+        format = "%i",
+        min_value = 10,
+        max_value = 10000
+        )
+
 def input_number_of_block_keepers():
     return st.number_input(
         label = r'Insert a total number of Block Keepers', 
@@ -116,50 +136,51 @@ node_type_option = st.selectbox(
 )
 
 if node_type_option == r"Block Keeper":
-    node_price_option = st.selectbox(
-    r"Select the node license price ($):",
-    (r"1500", 
-    r"1750", 
-    r"2041", 
-    r"2381", 
-    r"2778", 
-    r"3240", 
-    r"3780", 
-    r"4409", 
-    r"5143", 
-    r"6000"),
-   index=0,
-    )
-    if node_price_option == r"1500":
-        node_license_price = dec(1500)
-        #number_of_licenses_per_tier = dec(2500)
-    if node_price_option == r"1750":
-        node_license_price = dec(1750)
-        #number_of_licenses_per_tier = dec(2000)
-    if node_price_option == r"2041":
-        node_license_price = dec(2041)
-        #number_of_licenses_per_tier = dec(1300)
-    if node_price_option == r"2381":
-        node_license_price = dec(2381)
-        #number_of_licenses_per_tier = dec(1100)
-    if node_price_option == r"2778":
-        node_license_price = dec(2778)
-        #number_of_licenses_per_tier = dec(800)
-    if node_price_option == r"3240":
-        node_license_price = dec(3240)
-        #number_of_licenses_per_tier = dec(650)
-    if node_price_option == r"3780":
-        node_license_price = dec(3780)
-        #number_of_licenses_per_tier = dec(530)
-    if node_price_option == r"4409":
-        node_license_price = dec(4409)
-        #number_of_licenses_per_tier = dec(454)
-    if node_price_option == r"5143":
-        node_license_price = dec(5143)
-        #number_of_licenses_per_tier = dec(390)
-    if node_price_option == r"6000":
-        node_license_price = dec(6000)
-        #number_of_licenses_per_tier = dec(276)
+    #node_price_option = st.selectbox(
+    #r"Select the node license price ($):",
+    #(r"1500", 
+    #r"1750", 
+    #r"2041", 
+    #r"2381", 
+    #r"2778", 
+    #r"3240", 
+    #r"3780", 
+    #r"4409", 
+    #r"5143", 
+    #r"6000"),
+   #index=0,
+   # )
+    #if node_price_option == r"1500":
+    #    node_license_price = dec(1500)
+    #    #number_of_licenses_per_tier = dec(2500)
+    #if node_price_option == r"1750":
+    #    node_license_price = dec(1750)
+    #    #number_of_licenses_per_tier = dec(2000)
+    #if node_price_option == r"2041":
+    #    node_license_price = dec(2041)
+    #    #number_of_licenses_per_tier = dec(1300)
+    #if node_price_option == r"2381":
+    #    node_license_price = dec(2381)
+    #    #number_of_licenses_per_tier = dec(1100)
+    #if node_price_option == r"2778":
+    #    node_license_price = dec(2778)
+    #    #number_of_licenses_per_tier = dec(800)
+    #if node_price_option == r"3240":
+    #    node_license_price = dec(3240)
+    #    #number_of_licenses_per_tier = dec(650)
+    #if node_price_option == r"3780":
+    #    node_license_price = dec(3780)
+    #    #number_of_licenses_per_tier = dec(530)
+    #if node_price_option == r"4409":
+    #    node_license_price = dec(4409)
+    #    #number_of_licenses_per_tier = dec(454)
+    #if node_price_option == r"5143":
+    #    node_license_price = dec(5143)
+    #    #number_of_licenses_per_tier = dec(390)
+    #if node_price_option == r"6000":
+    #    node_license_price = dec(6000)
+    #    #number_of_licenses_per_tier = dec(276)
+    node_license_price = dec(input_bk_node_license_price())
     ParticipantsNum = dec(input_number_of_block_keepers())
     st.write(f"(assuming {round(ParticipantsNum / 10000 * 100, 2)}% node participation)")
     number_of_purchased_licenses = dec(input_number_of_licenses_per_tier_bk(ParticipantsNum))
@@ -246,50 +267,51 @@ if node_type_option == r"Block Keeper":
 
 
 if node_type_option == r"Block Manager":
-    node_price_option = st.selectbox(
-    r"Select the node license price ($):",
-    (r"400", 
-    r"478", 
-    r"572", 
-    r"684", 
-    r"818", 
-    r"978", 
-    r"1170", 
-    r"1399", 
-    r"1673", 
-    r"2000"),
-   index=0,
-    )
-    if node_price_option == r"400":
-        node_license_price = dec(400)
-        #number_of_licenses_per_tier = dec(2500)
-    if node_price_option == r"478":
-        node_license_price = dec(478)
-        #number_of_licenses_per_tier = dec(2000)
-    if node_price_option == r"572":
-        node_license_price = dec(572)
-        #number_of_licenses_per_tier = dec(1300)
-    if node_price_option == r"684":
-        node_license_price = dec(684)
-        #number_of_licenses_per_tier = dec(1100)
-    if node_price_option == r"818":
-        node_license_price = dec(818)
-        #number_of_licenses_per_tier = dec(800)
-    if node_price_option == r"978":
-        node_license_price = dec(978)
-        #number_of_licenses_per_tier = dec(650)
-    if node_price_option == r"1170":
-        node_license_price = dec(1170)
-        #number_of_licenses_per_tier = dec(530)
-    if node_price_option == r"1399":
-        node_license_price = dec(1399)
-        #number_of_licenses_per_tier = dec(454)
-    if node_price_option == r"1673":
-        node_license_price = dec(1673)
-        #number_of_licenses_per_tier = dec(390)
-    if node_price_option == r"2000":
-        node_license_price = dec(2000)
-        #number_of_licenses_per_tier = dec(276)
+    #node_price_option = st.selectbox(
+    #r"Select the node license price ($):",
+    #(r"400", 
+    #r"478", 
+    #r"572", 
+    #r"684", 
+    #r"818", 
+    #r"978", 
+    #r"1170", 
+    #r"1399", 
+    #r"1673", 
+    #r"2000"),
+   #index=0,
+   # )
+    #if node_price_option == r"400":
+    #    node_license_price = dec(400)
+    #    #number_of_licenses_per_tier = dec(2500)
+    #if node_price_option == r"478":
+    #    node_license_price = dec(478)
+    #    #number_of_licenses_per_tier = dec(2000)
+    #if node_price_option == r"572":
+    #    node_license_price = dec(572)
+    #    #number_of_licenses_per_tier = dec(1300)
+    #if node_price_option == r"684":
+    #    node_license_price = dec(684)
+    #    #number_of_licenses_per_tier = dec(1100)
+    #if node_price_option == r"818":
+    #    node_license_price = dec(818)
+    #    #number_of_licenses_per_tier = dec(800)
+    #if node_price_option == r"978":
+    #    node_license_price = dec(978)
+    #    #number_of_licenses_per_tier = dec(650)
+    #if node_price_option == r"1170":
+    #    node_license_price = dec(1170)
+    #    #number_of_licenses_per_tier = dec(530)
+    #if node_price_option == r"1399":
+    #    node_license_price = dec(1399)
+    #    #number_of_licenses_per_tier = dec(454)
+    #if node_price_option == r"1673":
+    #    node_license_price = dec(1673)
+    #    #number_of_licenses_per_tier = dec(390)
+    #if node_price_option == r"2000":
+    #    node_license_price = dec(2000)
+    #    #number_of_licenses_per_tier = dec(276)
+    node_license_price = dec(input_bm_node_license_price())
     ParticipantsNum = dec(input_number_of_block_managers())
     st.write(f"(assuming {round(ParticipantsNum / 10000 * 100, 2)}% node participation)")
     number_of_purchased_licenses = dec(input_number_of_licenses_per_tier_bm(ParticipantsNum))
