@@ -57,9 +57,9 @@ def expected_apy_calc(YearsNumber, TotalSupply, KFS, u_tokens, SecondsInYear, FR
 
 def input_number_of_licenses_per_tier_bk(ParticipantsNum):
     return st.number_input(
-        label = r'Insert a number of licenses', 
+        label = r'Insert a number of Block Keeper nodes', 
         #help = r"Number of licenses is in $ \left\lbrack 1, \min\left(200, \ \text{Number of Block Keepers}\right) \right\rbrack $", 
-        help = r"Number of licenses is in $ \left\lbrack 1, \text{Number of Block Keepers} \right\rbrack $", 
+        help = r"Number of Block Keeper nodes is in $ \left\lbrack 1, \text{Number of Block Keepers} \right\rbrack $", 
         value = 1, 
         format = "%i",
         min_value = 1,
@@ -69,9 +69,9 @@ def input_number_of_licenses_per_tier_bk(ParticipantsNum):
 
 def input_number_of_licenses_per_tier_bm(ParticipantsNum):
     return st.number_input(
-        label = r'Insert a number of licenses', 
+        label = r'Insert a number of Block Manager nodes', 
         #help = r"Number of licenses is in $ \left\lbrack 1, \min\left(200, \ \text{Number of Block Managers}\right) \right\rbrack $", 
-        help = r"Number of licenses is in $ \left\lbrack 1, \text{Number of Block Managers} \right\rbrack $", 
+        help = r"Number of Block manager nodes is in $ \left\lbrack 1, \text{Number of Block Managers} \right\rbrack $", 
         value = 1, 
         format = "%i",
         min_value = 1,
@@ -345,13 +345,13 @@ if node_type_option == r"Block Manager":
         values_x = np.arange(0, SecondsInYear * (plot_scale + 4) // 5 * 5 * 1.05,  SecondsInYear * (plot_scale + 4) // 5 * 5 * 1.05 / 1000)
         ax.set_xlim([0, (plot_scale + 4) // 5 * 5 * SecondsInYear * 1.05])
     values_tokens = np.array([minted_tokens_number_calc(t, TotalSupply, KFS, u_tokens, FRC, ParticipantsNum, number_of_purchased_licenses) for t in values_x])
-    values_ff = np.array([minted_tokens_number_calc(t, TotalSupply, KFS, u_tokens, FRC, ParticipantsNum, number_of_purchased_licenses) * free_float(t, FFF, maxFF, u_ff) for t in values_x])
-    values_stake = (values_tokens - values_ff)
+    #values_ff = np.array([minted_tokens_number_calc(t, TotalSupply, KFS, u_tokens, FRC, ParticipantsNum, number_of_purchased_licenses) * free_float(t, FFF, maxFF, u_ff) for t in values_x])
+    #values_stake = (values_tokens - values_ff)
     min_y_value = min(list(values_tokens))
     max_y_value = max(list(values_tokens))
     ax.plot(values_x, values_tokens, color = "Red", label = "Block Manager Minted Tokens")
-    ax.plot(values_x, values_ff, color = "Blue", label = "Block Manager Free Float Tokens")
-    ax.plot(values_x, values_stake, color = "Black", label = "Block Manager Minimum Staked Tokens")
+    #ax.plot(values_x, values_ff, color = "Blue", label = "Block Manager Free Float Tokens")
+    #ax.plot(values_x, values_stake, color = "Black", label = "Block Manager Minimum Staked Tokens")
     ax.set_ylim([min_y_value, max_y_value * dec(1.2)])
     y_ticks = ax.get_yticks()
     if max_y_value > 10 ** 9:
