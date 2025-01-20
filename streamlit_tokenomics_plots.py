@@ -16,7 +16,7 @@ def input_bk_node_license_price():
     return st.number_input(
         label = r'Insert a node license price ($)', 
         help = r"Node license price is in $ \lbrack 10, 10000\rbrack $", 
-        value = 1500, 
+        value = 2700, 
         format = "%i",
         min_value = 10,
         max_value = 10000
@@ -26,7 +26,7 @@ def input_bm_node_license_price():
     return st.number_input(
         label = r'Insert a node license price ($)', 
         help = r"Node license price is in $ \lbrack 10, 10000\rbrack $", 
-        value = 400, 
+        value = 800, 
         format = "%i",
         min_value = 10,
         max_value = 10000
